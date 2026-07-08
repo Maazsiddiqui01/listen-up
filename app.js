@@ -1,5 +1,6 @@
 
-let DATA, cur=null, tab='discover', genre='All', grouped=false;
+let DATA, cur=null, tab='discover', genre='All', grouped=false, listView=localStorage.getItem('lu-view')==='list';
+const COMPLEMENT={'Productivity':'Money','Money':'Psychology','Business':'Sales & Marketing','Sales & Marketing':'Psychology','Psychology':'Productivity','Health':'Productivity'};
 let prog=JSON.parse(localStorage.getItem('lu-prog')||'{}');
 let dl=JSON.parse(localStorage.getItem('lu-dl')||'{}');
 // cross-device progress sync (best-effort; localStorage stays the source of truth)
@@ -40,6 +41,9 @@ async function load(){
     document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));
     $('#chips').style.display=tab==='discover'?'':'none';$('#group').style.display=tab==='discover'?'':'none';render();});
   $('#group').onclick=()=>{grouped=!grouped;$('#group').classList.toggle('on',grouped);render();};
+  function setViewBtn(){ $('#view').innerHTML=listView?'▦ Grid':'☰ List'; $('#view').classList.toggle('on',listView); }
+  $('#view').onclick=()=>{listView=!listView;localStorage.setItem('lu-view',listView?'list':'grid');setViewBtn();render();};
+  setViewBtn();
   render();
   pullRemote();   // merge in progress from other devices
   if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
@@ -59,6 +63,26 @@ function renderContinue(){
   document.querySelectorAll('#contrail .rc').forEach(el=>el.onclick=()=>open(DATA.books.find(b=>b.slug===el.dataset.slug)));
 }
 
+function renderForYou(){
+  const aff={};
+  DATA.books.forEach(b=>{ const p=prog[b.slug]; if(!p)return; const w=p.done?2:(p.t>15?1:0);
+    if(w){ aff[b.genre]=(aff[b.genre]||0)+w; const c=COMPLEMENT[b.genre]; if(c) aff[c]=(aff[c]||0)+w*0.6; } });
+  const hasHist=Object.keys(aff).length>0;
+  const pool=DATA.books.filter(b=>b.status==='ready'&&!isDone(b)&&!started(b));
+  const ranked = hasHist
+    ? pool.map((b,i)=>({b,s:(aff[b.genre]||0)-i*0.001})).sort((x,y)=>y.s-x.s).map(x=>x.b)
+    : pool;
+  const pick=[], gc={};
+  for(const b of ranked){ if(pick.length>=3) break; if((gc[b.genre]||0)>=2) continue; pick.push(b); gc[b.genre]=(gc[b.genre]||0)+1; }
+  $('#foryou').hidden = pick.length===0;
+  $('#furail').innerHTML = pick.map(b=>{
+    const why = hasHist ? ((aff[b.genre]||0)>0 ? 'Because you like '+b.genre : 'A fresh pick') : b.genre;
+    return `<div class="rc fu" data-slug="${b.slug}"><img src="covers/${b.slug}.png" alt="">
+      <div style="flex:1;min-width:0"><div class="rt">${b.title}</div><div class="rl">${why}${b.duration?' · '+b.duration:''}</div></div></div>`;
+  }).join('');
+  document.querySelectorAll('#furail .rc').forEach(el=>el.onclick=()=>open(DATA.books.find(b=>b.slug===el.dataset.slug)));
+}
+
 function card(b){
   const cover=`covers/${b.slug}.png`;
   const p=prog[b.slug];
@@ -68,14 +92,17 @@ function card(b){
   return `<article class="bk ${b.status}" data-slug="${b.slug}">
     <div class="cw"><img src="${cover}" alt="${b.title}" onerror="this.style.opacity=0">${badge}
     ${b.status==='ready'?'<div class="play">▶</div>':''}${pbar}</div>
-    <h3>${b.title}</h3><div class="au">${b.author}</div>
+    <div class="bkmeta"><h3>${b.title}</h3><div class="au">${b.author}</div>
     <div class="blurb">${b.blurb||''}</div>
-    <div class="mrow"><span>${b.genre}</span>${b.duration?`<span>${b.duration}</span>`:''}</div></article>`;
+    <div class="mrow"><span>${b.genre}</span>${b.duration?`<span>${b.duration}</span>`:''}${dl[b.slug]?'<span class="dlpill">⤓ Saved</span>':''}</div></div></article>`;
 }
 
 function render(){
-  renderContinue();
+  renderContinue(); renderForYou();
+  if(tab!=='discover'){ $('#cont').hidden=true; $('#foryou').hidden=true; }
+  $('#lib').classList.toggle('list',listView);
   let books;
+  if(tab==='downloads'){ books=DATA.books.filter(b=>dl[b.slug]); $('#lib').innerHTML=books.length?books.map(card).join(''):'<p style="padding:1.5rem;color:var(--sub);grid-column:1/-1">Nothing downloaded yet. Open any episode and tap the Download button to save it here and listen offline, no internet needed.</p>'; bind(); return; }
   if(tab==='finished'){ books=DATA.books.filter(isDone); $('#lib').innerHTML=books.length?books.map(card).join(''):'<p style="padding:1.5rem;color:var(--sub);grid-column:1/-1">Nothing finished yet. Your completed listens will land here.</p>'; bind(); return; }
   books=DATA.books.filter(b=>!isDone(b)).filter(b=>genre==='All'||b.genre===genre);
   if(grouped&&genre==='All'){
@@ -153,9 +180,12 @@ function vizLoop(){
 // ---- offline download ----
 function updDl(){ const b=$('#dl'); if(dl[cur.slug]){b.textContent='✓ Saved offline';b.classList.add('done');}
   else{b.textContent='⤓ Download';b.classList.remove('done');} }
-$('#dl').onclick=async()=>{ if(dl[cur.slug])return; $('#dl').textContent='Saving…';
+$('#dl').onclick=async()=>{
+  if(dl[cur.slug]){ try{ const c=await caches.open('lu-audio'); await c.delete(cur.audio); }catch(e){}
+    delete dl[cur.slug]; localStorage.setItem('lu-dl',JSON.stringify(dl)); updDl(); toast('Download removed'); if(tab==='downloads')render(); return; }
+  $('#dl').textContent='Saving…';
   try{ const c=await caches.open('lu-audio'); await c.add(cur.audio);
-    dl[cur.slug]=1; localStorage.setItem('lu-dl',JSON.stringify(dl)); updDl(); toast('Saved for offline ✓');
+    dl[cur.slug]=1; localStorage.setItem('lu-dl',JSON.stringify(dl)); updDl(); toast('Saved for offline ✓'); if(tab==='downloads')render();
   }catch(e){ toast('Could not save'); updDl(); } };
 
 let tid; function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(tid);tid=setTimeout(()=>t.hidden=true,2600);}

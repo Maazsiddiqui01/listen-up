@@ -1,7 +1,7 @@
 {
  "name": "Listen Up",
  "short_name": "Listen Up",
- "description": "Big books, distilled \u2014 audio summaries you can listen to offline.",
+ "description": "Big books, distilled. Audio summaries you can listen to offline.",
  "start_url": "./",
  "scope": "./",
  "display": "standalone",
