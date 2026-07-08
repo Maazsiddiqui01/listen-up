@@ -105,6 +105,7 @@ function render(){
   if(tab==='downloads'){ books=DATA.books.filter(b=>dl[b.slug]); $('#lib').innerHTML=books.length?books.map(card).join(''):'<p style="padding:1.5rem;color:var(--sub);grid-column:1/-1">Nothing downloaded yet. Open any episode and tap the Download button to save it here and listen offline, no internet needed.</p>'; bind(); return; }
   if(tab==='finished'){ books=DATA.books.filter(isDone); $('#lib').innerHTML=books.length?books.map(card).join(''):'<p style="padding:1.5rem;color:var(--sub);grid-column:1/-1">Nothing finished yet. Your completed listens will land here.</p>'; bind(); return; }
   books=DATA.books.filter(b=>!isDone(b)).filter(b=>genre==='All'||b.genre===genre);
+  books.sort((a,b)=>(a.status==='ready'?0:1)-(b.status==='ready'?0:1));   // ready first, "Soon" sink to the bottom
   if(grouped&&genre==='All'){
     let html='';
     DATA.genres.forEach(g=>{const gb=books.filter(b=>b.genre===g.name); if(gb.length){html+=`<div class="seclabel">${g.name}</div>`+gb.map(card).join('');}});
