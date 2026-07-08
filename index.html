@@ -1,36 +1,45 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#17131A"><meta name="robots" content="noindex">
+<meta name="theme-color" content="#0FA0A0"><meta name="robots" content="noindex">
 <link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-192.png">
 <title>Listen Up</title><link rel="stylesheet" href="styles.css"></head><body>
 <header class="top"><div class="brand"><span class="logo">🎧</span><b>Listen Up</b></div>
-<button id="install" class="install" hidden>Install</button></header>
+<div class="tools"><button id="theme" class="icon" title="Theme">🌙</button>
+<button id="install" class="install" hidden>Install</button></div></header>
 <p class="tag" id="tag"></p>
+
+<section id="cont" class="cont" hidden><h2 class="h">Jump back in</h2><div id="contrail" class="rail"></div></section>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-t="discover">Discover</button>
+  <button class="tab" data-t="finished">Finished</button>
+  <span class="grow"></span>
+  <button id="group" class="grpbtn">▤ By topic</button>
+</div>
 <div id="chips" class="chips"></div>
 <main id="lib" class="lib"></main>
-<div class="foot">New titles added weekly · works offline · add to home screen</div>
+<div class="foot">New titles added weekly · works offline · installable</div>
 
 <div id="mini" class="mini" hidden>
+  <div id="mibar" class="mibar"></div>
   <img id="mcover" alt=""><div class="mmeta"><div id="mtitle"></div><div id="mauthor" class="msub"></div></div>
   <button id="mplay" class="mplay">▶</button></div>
 
 <section id="player" class="player" hidden>
-  <button id="close" class="close">▾</button>
-  <img id="pcover" class="pcover" alt="">
-  <div class="pinfo"><div id="ptitle" class="ptitle"></div><div id="pauthor" class="pauthor"></div>
-    <div id="pblurb" class="pblurb"></div></div>
-  <input id="seek" class="seek" type="range" min="0" max="1000" value="0">
-  <div class="times"><span id="cur">0:00</span><span id="dur">0:00</span></div>
-  <div class="controls">
-    <button id="back" class="ctl">↺15</button>
-    <button id="play" class="playbig">▶</button>
-    <button id="fwd" class="ctl">15↻</button>
-  </div>
-  <div class="prow">
-    <button id="speed" class="pill">1×</button>
-    <button id="dl" class="pill">⤓ Download</button>
+  <div class="psheet">
+    <button id="close" class="close">▾</button>
+    <img id="pcover" class="pcover" alt="">
+    <div id="ptitle" class="ptitle"></div><div id="pauthor" class="pauthor"></div>
+    <canvas id="viz" class="viz"></canvas>
+    <input id="seek" class="seek" type="range" min="0" max="1000" value="0">
+    <div class="times"><span id="cur">0:00</span><span id="dur">0:00</span></div>
+    <div class="controls"><button id="back" class="ctl">↺&nbsp;15</button>
+      <button id="play" class="playbig">▶</button><button id="fwd" class="ctl">15&nbsp;↻</button></div>
+    <div class="prow"><button id="speed" class="pill">1×</button>
+      <button id="dl" class="pill">⤓ Download</button></div>
+    <p id="pblurb" class="pblurb"></p>
   </div>
 </section>
-<audio id="audio" preload="metadata"></audio>
+<audio id="audio" preload="metadata" crossorigin="anonymous"></audio>
 <div id="toast" class="toast" hidden></div>
 <script src="app.js"></script></body></html>
