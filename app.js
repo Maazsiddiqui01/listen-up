@@ -2,6 +2,20 @@
 let DATA, cur=null, tab='discover', genre='All', grouped=false;
 let prog=JSON.parse(localStorage.getItem('lu-prog')||'{}');
 let dl=JSON.parse(localStorage.getItem('lu-dl')||'{}');
+// cross-device progress sync (best-effort; localStorage stays the source of truth)
+const SB={url:'https://rfuflyhitqwxtcecllya.supabase.co',key:'sb_publishable_uUA9BpF1dAitc6lVa0IqTg_TX6igiQ4',user:'maaz'};
+let lastRemote=0;
+function pushRemote(force){ if(!cur||!audio.duration)return; if(!force&&Date.now()-lastRemote<8000)return; lastRemote=Date.now();
+  const p=prog[cur.slug]; if(!p)return;
+  fetch(SB.url+'/rest/v1/listenup_progress?on_conflict=user_key,slug',{method:'POST',
+    headers:{apikey:SB.key,Authorization:'Bearer '+SB.key,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates'},
+    body:JSON.stringify({user_key:SB.user,slug:cur.slug,t:p.t,dur:p.dur,done:!!p.done,updated_at:new Date().toISOString()})}).catch(()=>{}); }
+function pullRemote(){
+  fetch(SB.url+'/rest/v1/listenup_progress?select=slug,t,dur,done,updated_at&user_key=eq.'+SB.user,{headers:{apikey:SB.key,Authorization:'Bearer '+SB.key}})
+  .then(r=>r.ok?r.json():[]).then(rows=>{ let ch=false;
+    rows.forEach(row=>{ const u=Date.parse(row.updated_at)||0, loc=prog[row.slug];
+      if(!loc||u>(loc.u||0)){ prog[row.slug]={t:row.t||0,dur:row.dur||0,done:!!row.done,u}; ch=true; } });
+    if(ch){ saveProg(); render(); } }).catch(()=>{}); }
 const $=s=>document.querySelector(s);
 const audio=$('#audio'), SPEEDS=[1,1.25,1.5,1.75,2]; let si=0;
 const fmt=s=>{s=Math.max(0,Math.round(s||0));return (s/60|0)+':'+String(s%60).padStart(2,'0');};
@@ -27,6 +41,7 @@ async function load(){
     $('#chips').style.display=tab==='discover'?'':'none';$('#group').style.display=tab==='discover'?'':'none';render();});
   $('#group').onclick=()=>{grouped=!grouped;$('#group').classList.toggle('on',grouped);render();};
   render();
+  pullRemote();   // merge in progress from other devices
   if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 }
 
@@ -89,22 +104,25 @@ function open(b){
 }
 function setPlay(p){ $('#play').textContent=$('#mplay').textContent=p?'❚❚':'▶'; }
 $('#play').onclick=$('#mplay').onclick=()=>{ audio.paused?audio.play().catch(()=>{}):audio.pause(); };
-audio.onplay=()=>{setPlay(true);startViz();}; audio.onpause=()=>{setPlay(false);saveNow();stopViz();};
+audio.onplay=()=>{setPlay(true);startViz();}; audio.onpause=()=>{setPlay(false);saveNow();pushRemote(true);stopViz();};
 audio.ontimeupdate=()=>{ if(!audio.duration)return;
   $('#seek').value=1000*audio.currentTime/audio.duration;
   $('#cur').textContent=fmt(audio.currentTime); $('#dur').textContent=fmt(audio.duration);
   $('#mibar').style.width=(100*audio.currentTime/audio.duration)+'%';
   if(cur && (Date.now()-lastSave>4000)) saveNow(); };
-audio.onended=()=>{ if(cur){prog[cur.slug]={t:0,dur:audio.duration,done:true};saveProg();render();toast('Finished ✓ moved to your Finished shelf');} };
+audio.onended=()=>{ if(cur){prog[cur.slug]={t:0,dur:audio.duration,done:true,u:Date.now()};saveProg();pushRemote(true);render();toast('Finished ✓ moved to your Finished shelf');} };
 let lastSave=0;
 function saveNow(){ if(!cur||!audio.duration)return; lastSave=Date.now();
   const done=audio.currentTime>=audio.duration*0.97;
-  prog[cur.slug]={t:done?0:audio.currentTime,dur:audio.duration,done};saveProg(); }
+  prog[cur.slug]={t:done?0:audio.currentTime,dur:audio.duration,done,u:Date.now()};saveProg(); pushRemote(false); }
 $('#seek').oninput=e=>{ if(audio.duration) audio.currentTime=e.target.value/1000*audio.duration; };
 $('#back').onclick=()=>audio.currentTime=Math.max(0,audio.currentTime-15);
 $('#fwd').onclick=()=>audio.currentTime=Math.min(audio.duration||1e9,audio.currentTime+15);
 $('#speed').onclick=()=>{ si=(si+1)%SPEEDS.length; audio.playbackRate=SPEEDS[si]; $('#speed').textContent=SPEEDS[si]+'×'; };
-$('#close').onclick=()=>{ saveNow(); stopViz(); $('#player').hidden=true; render(); };
+function closePlayer(){ saveNow(); pushRemote(true); stopViz(); $('#player').hidden=true; render(); }
+$('#close').onclick=closePlayer;
+$('#player').onclick=e=>{ if(e.target===$('#player')) closePlayer(); };   // tap the dim backdrop
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!$('#player').hidden) closePlayer(); });
 $('#mini').onclick=e=>{ if(e.target.id!=='mplay') $('#player').hidden=false; };
 
 // ---- live waveform ----

@@ -7,6 +7,7 @@
  --bg:#0C1719; --grad1:#0E1F22; --grad2:#0C1417; --card:#15272A; --ink:#E9F3F2; --sub:#8FABAC;
  --line:#22383B; --acc:#2ED3C6; --acc2:#5AB4E4; --shadow:0 12px 34px rgba(0,0,0,.45)}
 *{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none!important}
 html{background:
  radial-gradient(1100px 620px at 8% -8%,var(--grad1) 0,transparent 55%),
  radial-gradient(900px 600px at 100% 0,var(--grad2) 0,transparent 55%),var(--bg);
