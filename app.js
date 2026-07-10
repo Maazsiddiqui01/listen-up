@@ -133,7 +133,7 @@ function card(b){
 }
 
 function render(){
-  renderContinue(); renderForYou();
+  renderContinue(); renderForYou(); renderDownloadsStatus();
   if(tab!=='discover'){ $('#cont').hidden=true; $('#foryou').hidden=true; }
   $('#lib').classList.toggle('list',listView);
   let books;
@@ -393,6 +393,60 @@ $('#dl').onclick=async()=>{
   await downloadCurrent();
 };
 
+// ---- storage health, so a failure is diagnosable instead of mysterious ----
+async function storageHealth(){
+  const h={durable:false,usage:0,quota:0,sw:!!(navigator.serviceWorker&&navigator.serviceWorker.controller),installed:standalone()};
+  try{ if(navigator.storage){
+    if(navigator.storage.persisted) h.durable=await navigator.storage.persisted();
+    if(navigator.storage.estimate){ const e=await navigator.storage.estimate(); h.usage=e.usage||0; h.quota=e.quota||0; }
+  } }catch(e){}
+  return h;
+}
+
+// Read every downloaded file back out of the cache and check its bytes.
+// Repairs (drops) anything missing or truncated, then reports honestly.
+async function verifyDownloads(){
+  const btn=$('#dsverify'); if(btn){ btn.disabled=true; btn.textContent='Checking…'; }
+  let ok=0,bad=0;
+  try{
+    const c=await caches.open(AUDIO_CACHE);
+    for(const slug of Object.keys(dl)){
+      const bk=DATA.books.find(x=>x.slug===slug);
+      if(!bk){ delete dl[slug]; bad++; continue; }
+      const hit=await c.match(bk.audio,{ignoreVary:true});
+      if(!hit){ delete dl[slug]; bad++; continue; }
+      const size=(await hit.clone().blob()).size;
+      const expect=(dl[slug]&&dl[slug].size)||0;
+      if(!size||(expect&&Math.abs(size-expect)>1024)){ await removeDownload(slug,bk.audio); bad++; continue; }
+      if(!expect) dl[slug]={size,at:Date.now()};   // upgrade the old `1` format
+      ok++;
+    }
+    saveDl();
+  }catch(e){}
+  if(btn){ btn.disabled=false; }
+  toast(bad? (ok+' ok, '+bad+' broken and cleared. Re-download those.') : ('All '+ok+' download'+(ok===1?'':'s')+' verified ✓'));
+  render();
+}
+
+async function renderDownloadsStatus(){
+  const el=$('#dlstat');
+  if(tab!=='downloads'){ el.hidden=true; return; }
+  el.hidden=false;
+  const slugs=Object.keys(dl);
+  const bytes=slugs.reduce((n,s)=>n+((dl[s]&&dl[s].size)||0),0);
+  const h=await storageHealth();
+  const durable = h.durable
+    ? '<span class="ds dsok">Storage: durable ✓</span>'
+    : '<span class="ds dswarn">Storage: at risk ⚠ your phone may delete these. Install Listen Up to your home screen to make them permanent.</span>';
+  el.innerHTML =
+    `<span class="ds"><b>${slugs.length}</b> episode${slugs.length===1?'':'s'}${bytes?' · <b>'+fmtMB(bytes)+'</b>':''}</span>`
+    + (h.quota?`<span class="ds">${fmtMB(h.usage)} of ${fmtMB(h.quota)} used</span>`:'')
+    + durable
+    + `<span class="grow"></span>`
+    + (slugs.length?`<button id="dsverify" class="dsbtn" type="button">Verify downloads</button>`:'');
+  const b=$('#dsverify'); if(b) b.onclick=verifyDownloads;
+}
+
 // The Downloads tab must never claim something that is not actually on disk.
 // Reconcile localStorage against the real cache, in both directions.
 async function reconcileDownloads(){
@@ -419,4 +473,12 @@ let tid; function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;cl
 window.addEventListener('beforeunload',saveNow);
 let deferred; window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;$('#install').hidden=false;});
 $('#install').onclick=async()=>{ if(!deferred)return; deferred.prompt(); await deferred.userChoice; deferred=null; $('#install').hidden=true; };
+// Chrome grants durable storage to INSTALLED apps, so ask again the moment we're installed
+window.addEventListener('appinstalled',async()=>{
+  $('#install').hidden=true;
+  const granted=await askPersist();
+  toast(granted?'Installed. Your downloads are now permanent ✓':'Installed ✓');
+  render();
+});
+if(standalone()) askPersist();   // already installed: make sure storage is durable
 load();
