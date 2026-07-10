@@ -15,6 +15,10 @@ document.documentElement.dataset.theme=t;var m=document.querySelector('meta[name
 <div class="tools"><button id="theme" class="icon" type="button" title="Switch theme" aria-label="Switch theme">🌙</button>
 <button id="install" class="install" type="button" hidden>Install</button></div></header>
 <p class="tag" id="tag"></p>
+<div id="offbar" class="offbar" role="status" hidden>
+  <span class="offdot" aria-hidden="true"></span>
+  <span id="offtext">You're offline. Showing episodes you've downloaded.</span>
+</div>
 
 <section id="cont" class="cont" hidden><h2 class="h">Jump back in</h2><div id="contrail" class="rail"></div></section>
 <section id="foryou" class="cont" hidden><h2 class="h">For you</h2><div id="furail" class="rail"></div></section>

@@ -48,16 +48,41 @@ async function load(){
   $('#view').onclick=()=>{listView=!listView;localStorage.setItem('lu-view',listView?'list':'grid');setViewBtn();render();};
   setViewBtn();
   $('#speed').textContent=SPEEDS[si]+'×';
-  render();
-  pullRemote();   // merge in progress from other devices
-  if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+  applyOffline();
+  if(offline) showDownloads(); else render();   // offline? land straight on Downloads, Netflix-style
+  if(!offline) pullRemote();                    // merge in progress from other devices
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+    navigator.serviceWorker.ready.then(()=>reconcileDownloads()).catch(()=>{});
+  } else { reconcileDownloads(); }
 }
 
 const isDone=b=>prog[b.slug]&&prog[b.slug].done;
 const started=b=>prog[b.slug]&&prog[b.slug].t>15&&!prog[b.slug].done;
 
+// ---- offline awareness ----
+let offline=!navigator.onLine;
+const playable=b=>b.status==='ready'&&(!offline||!!dl[b.slug]);
+function applyOffline(){
+  $('#offbar').hidden=!offline;
+  $('#offtext').textContent=Object.keys(dl).length
+    ? "You're offline. Showing episodes you've downloaded."
+    : "You're offline, and nothing is downloaded yet. Connect to save episodes for later.";
+}
+function goOffline(){ if(offline) return; offline=true; applyOffline(); showDownloads(); toast('Offline. Showing your downloads.'); }
+function goOnline(){ if(!offline) return; offline=false; applyOffline(); render(); toast('Back online'); }
+window.addEventListener('offline',goOffline);
+window.addEventListener('online',goOnline);
+function showDownloads(){
+  tab='downloads';
+  document.querySelectorAll('.tab').forEach(x=>{const on=x.dataset.t==='downloads';
+    x.classList.toggle('on',on); x.setAttribute('aria-selected',on);});
+  $('#chips').hidden=true; $('#group').hidden=true;
+  render();
+}
+
 function renderContinue(){
-  const inpr=DATA.books.filter(started);
+  const inpr=DATA.books.filter(b=>started(b)&&playable(b));
   $('#cont').hidden=inpr.length===0;
   $('#contrail').innerHTML=inpr.map(b=>{const p=prog[b.slug];const pct=p.dur?Math.min(100,100*p.t/p.dur):0;
     const left=p.dur?Math.max(1,Math.round((p.dur-p.t)/60)):'';
@@ -73,7 +98,7 @@ function renderForYou(){
   DATA.books.forEach(b=>{ const p=prog[b.slug]; if(!p)return; const w=p.done?2:(p.t>15?1:0);
     if(w){ aff[b.genre]=(aff[b.genre]||0)+w; const c=COMPLEMENT[b.genre]; if(c) aff[c]=(aff[c]||0)+w*0.6; } });
   const hasHist=Object.keys(aff).length>0;
-  const pool=DATA.books.filter(b=>b.status==='ready'&&!isDone(b)&&!started(b));
+  const pool=DATA.books.filter(b=>playable(b)&&!isDone(b)&&!started(b));
   const ranked = hasHist
     ? pool.map((b,i)=>({b,s:(aff[b.genre]||0)-i*0.001})).sort((x,y)=>y.s-x.s).map(x=>x.b)
     : pool;
@@ -95,11 +120,13 @@ function card(b){
   const badge = b.status!=='ready' ? '<span class="badge">Soon</span>'
     : isDone(b) ? '<span class="badge done">✓ Done</span>' : `<span class="badge">${b.duration}</span>`;
   const pbar = (b.status==='ready'&&p&&p.dur&&!isDone(b)&&p.t>5)?`<div class="pbar"><span style="width:${100*p.t/p.dur}%"></span></div>`:'';
-  const label = b.status==='ready'
-    ? `Play ${b.title} by ${b.author}, ${b.duration}` : `${b.title} by ${b.author}, coming soon`;
-  return `<article class="bk ${b.status}" data-slug="${b.slug}" role="button" tabindex="0" aria-label="${esc(label)}">
+  const off = b.status==='ready' && !playable(b);   // offline and not downloaded
+  const label = b.status!=='ready' ? `${b.title} by ${b.author}, coming soon`
+    : off ? `${b.title} by ${b.author}, not downloaded, unavailable offline`
+    : `Play ${b.title} by ${b.author}, ${b.duration}`;
+  return `<article class="bk ${b.status}${off?' unavail':''}" data-slug="${b.slug}" role="button" tabindex="0" aria-label="${esc(label)}">
     <div class="cw"><img src="${cover}" alt="" decoding="async" onerror="this.style.opacity=0">${badge}
-    ${b.status==='ready'?'<div class="play" aria-hidden="true">▶</div>':''}${pbar}</div>
+    ${playable(b)?'<div class="play" aria-hidden="true">▶</div>':''}${pbar}</div>
     <div class="bkmeta"><h3>${esc(b.title)}</h3><div class="au">${esc(b.author)}</div>
     <div class="blurb">${esc(b.blurb||'')}</div>
     <div class="mrow"><span>${esc(b.genre)}</span>${b.duration?`<span>${b.duration}</span>`:''}${dl[b.slug]?'<span class="dlpill">⤓ Saved</span>':''}</div></div></article>`;
@@ -110,7 +137,11 @@ function render(){
   if(tab!=='discover'){ $('#cont').hidden=true; $('#foryou').hidden=true; }
   $('#lib').classList.toggle('list',listView);
   let books;
-  if(tab==='downloads'){ books=DATA.books.filter(b=>dl[b.slug]); $('#lib').innerHTML=books.length?books.map(card).join(''):'<p style="padding:1.5rem;color:var(--sub);grid-column:1/-1">Nothing downloaded yet. Open any episode and tap the Download button to save it here and listen offline, no internet needed.</p>'; bind(); return; }
+  if(tab==='downloads'){ books=DATA.books.filter(b=>dl[b.slug]);
+    const empty = offline
+      ? 'Nothing is downloaded. You will need an internet connection to save episodes for offline listening.'
+      : 'Nothing downloaded yet. Open any episode and tap the Download button to save it here and listen offline, no internet needed.';
+    $('#lib').innerHTML=books.length?books.map(card).join(''):'<p style="padding:1.5rem;color:var(--sub);grid-column:1/-1">'+empty+'</p>'; bind(); return; }
   if(tab==='finished'){ books=DATA.books.filter(isDone); $('#lib').innerHTML=books.length?books.map(card).join(''):'<p style="padding:1.5rem;color:var(--sub);grid-column:1/-1">Nothing finished yet. Your completed listens will land here.</p>'; bind(); return; }
   books=DATA.books.filter(b=>!isDone(b)).filter(b=>genre==='All'||b.genre===genre);
   books.sort((a,b)=>(a.status==='ready'?0:1)-(b.status==='ready'?0:1));   // ready first, "Soon" sink to the bottom
@@ -123,7 +154,9 @@ function render(){
 }
 function bind(){ document.querySelectorAll('.bk').forEach(el=>{
   const go=()=>{const b=DATA.books.find(x=>x.slug===el.dataset.slug);
-    b.status==='ready'?openBook(b):toast('“'+b.title+'” drops this week 🎧');};
+    if(b.status!=='ready'){ toast('“'+b.title+'” drops this week 🎧'); return; }
+    if(!playable(b)){ toast('Not downloaded. Connect to the internet to stream it.'); return; }
+    openBook(b);};
   el.onclick=go;
   el.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); } };
 }); }
@@ -163,7 +196,8 @@ window.addEventListener('popstate',()=>{
 });
 
 function openBook(b){
-  cur=b; audio.src=b.audio;
+  if(!playable(b)){ toast('Not downloaded. Connect to the internet to stream it.'); return; }
+  cur=b; confirmRemove=false; clearTimeout(confirmTid); audio.src=b.audio;
   $('#pcover').src=$('#mcover').src=`covers/${b.slug}.png`;
   $('#ptitle').textContent=$('#mtitle').textContent=b.title;
   $('#pauthor').textContent=$('#mauthor').textContent=b.author+(b.voice?' · read by '+b.voice:'');
@@ -206,6 +240,11 @@ audio.ontimeupdate=()=>{ if(!audio.duration)return;
   $('#mibar').style.width=(100*audio.currentTime/audio.duration)+'%';
   if(cur && (Date.now()-lastSave>4000)) saveNow(); };
 audio.onended=()=>{ if(cur){prog[cur.slug]={t:0,dur:audio.duration,done:true,u:Date.now()};saveProg();pushRemote(true);render();toast('Finished ✓ moved to your Finished shelf');} };
+// a failed load used to do nothing at all; say so, and self-heal a bad download
+audio.onerror=()=>{ if(!cur) return;
+  if(dl[cur.slug]){ removeDownload(cur.slug,cur.audio).then(()=>{ updDl(); render();
+    toast('That download was corrupted and has been cleared. Please download it again.'); }); }
+  else toast(navigator.onLine?'Could not load this episode.':'You are offline and this episode is not downloaded.'); };
 let lastSave=0;
 function saveNow(){ if(!cur||!audio.duration)return; lastSave=Date.now();
   const done=audio.currentTime>=audio.duration*0.97;
@@ -260,15 +299,121 @@ function vizLoop(){
 }
 
 // ---- offline download ----
-function updDl(){ const b=$('#dl'); if(dl[cur.slug]){b.textContent='✓ Saved offline';b.classList.add('done');}
-  else{b.textContent='⤓ Download';b.classList.remove('done');} }
+const saveDl=()=>localStorage.setItem('lu-dl',JSON.stringify(dl));
+const AUDIO_CACHE='lu-audio';
+let confirmRemove=false, confirmTid;
+
+function updDl(){ const b=$('#dl'); if(!cur) return;
+  b.disabled=false;
+  if(confirmRemove){ b.textContent='Tap again to remove'; b.classList.add('done'); return; }
+  if(dl[cur.slug]){ b.textContent='✓ Saved offline'; b.classList.add('done'); }
+  else{ b.textContent='⤓ Download'; b.classList.remove('done'); } }
+
+// Ask the browser not to evict our audio. Without this, mobile browsers silently
+// purge the Cache API under storage pressure and downloads vanish.
+async function askPersist(){
+  try{ if(navigator.storage&&navigator.storage.persist){
+    if(await navigator.storage.persisted()) return true;
+    return await navigator.storage.persist();
+  } }catch(e){}
+  return false;
+}
+
+async function removeDownload(slug,url){
+  try{ const c=await caches.open(AUDIO_CACHE); await c.delete(url,{ignoreVary:true}); }catch(e){}
+  delete dl[slug]; saveDl();
+}
+
+async function downloadCurrent(){
+  const b=$('#dl'), slug=cur.slug, url=cur.audio, title=cur.title;
+  b.disabled=true; b.textContent='Saving…';
+  await askPersist();
+  try{
+    const res=await fetch(url,{cache:'no-store'});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const total=+(res.headers.get('Content-Length')||0);
+    let blob;
+    if(res.body&&res.body.getReader){                 // stream so we can show real progress
+      const reader=res.body.getReader(); const chunks=[]; let got=0;
+      for(;;){ const {done,value}=await reader.read(); if(done) break;
+        chunks.push(value); got+=value.length;
+        if(total) b.textContent='Saving '+Math.min(99,Math.round(got/total*100))+'%'; }
+      blob=new Blob(chunks,{type:'audio/mpeg'});
+    } else { blob=await res.blob(); }
+    if(total&&Math.abs(blob.size-total)>1024) throw new Error('incomplete download');
+    if(!blob.size) throw new Error('empty file');
+
+    const c=await caches.open(AUDIO_CACHE);
+    // store a clean, full 200 with the headers the SW needs to synthesise 206s
+    await c.put(url,new Response(blob,{status:200,headers:{
+      'Content-Type':'audio/mpeg','Content-Length':String(blob.size),'Accept-Ranges':'bytes'}}));
+
+    const verify=await c.match(url,{ignoreVary:true});      // never trust, always verify
+    if(!verify) throw new Error('verification failed');
+    const vb=await verify.clone().blob();
+    if(vb.size!==blob.size) throw new Error('verification size mismatch');
+
+    dl[slug]={size:blob.size,at:Date.now()}; saveDl();
+    toast('Saved offline ✓ '+fmtMB(blob.size));
+    maybeWarnEviction();
+  }catch(e){
+    await removeDownload(slug,url);                          // never leave a half-download claiming success
+    toast(navigator.onLine?('Could not save “'+title+'”. '+(e.message||'')):'Could not save. You are offline.');
+  }
+  b.disabled=false; updDl(); render();
+}
+
+const fmtMB=n=>(n/1048576).toFixed(0)+' MB';
+
+// If the browser refuses durable storage, downloads can be evicted under pressure
+// (and iOS Safari clears an un-installed site after ~7 idle days). Installing the
+// PWA is the only real fix, so say so once, plainly.
+const standalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+async function maybeWarnEviction(){
+  if(localStorage.getItem('lu-evict-warned')) return;
+  let durable=false;
+  try{ durable=navigator.storage&&navigator.storage.persisted?await navigator.storage.persisted():false; }catch(e){}
+  if(durable||standalone()) return;
+  localStorage.setItem('lu-evict-warned','1');
+  setTimeout(()=>toast('Tip: install Listen Up to your home screen so your phone never deletes downloads.'),3000);
+}
+
 $('#dl').onclick=async()=>{
-  if(dl[cur.slug]){ try{ const c=await caches.open('lu-audio'); await c.delete(cur.audio); }catch(e){}
-    delete dl[cur.slug]; localStorage.setItem('lu-dl',JSON.stringify(dl)); updDl(); toast('Download removed'); if(tab==='downloads')render(); return; }
-  $('#dl').textContent='Saving…';
-  try{ const c=await caches.open('lu-audio'); await c.add(cur.audio);
-    dl[cur.slug]=1; localStorage.setItem('lu-dl',JSON.stringify(dl)); updDl(); toast('Saved for offline ✓'); if(tab==='downloads')render();
-  }catch(e){ toast('Could not save'); updDl(); } };
+  if(!cur) return;
+  if(dl[cur.slug]){
+    if(!confirmRemove){                                      // two-tap guard: one stray tap used to delete it
+      confirmRemove=true; updDl();
+      clearTimeout(confirmTid); confirmTid=setTimeout(()=>{confirmRemove=false;updDl();},3200);
+      return;
+    }
+    clearTimeout(confirmTid); confirmRemove=false;
+    await removeDownload(cur.slug,cur.audio);
+    updDl(); toast('Download removed'); render(); return;
+  }
+  await downloadCurrent();
+};
+
+// The Downloads tab must never claim something that is not actually on disk.
+// Reconcile localStorage against the real cache, in both directions.
+async function reconcileDownloads(){
+  if(!('caches' in window)) return;
+  let c; try{ c=await caches.open(AUDIO_CACHE); }catch(e){ return; }
+  const keys=await c.keys();
+  const have=new Set(keys.map(k=>new URL(k.url).pathname));
+  let lost=0;
+  for(const slug of Object.keys(dl)){
+    const bk=DATA.books.find(x=>x.slug===slug);
+    if(!bk){ delete dl[slug]; continue; }
+    const path=new URL(bk.audio,location.href).pathname;
+    if(!have.has(path)){ delete dl[slug]; lost++; }          // browser evicted it
+  }
+  // drop stray entries the old service worker auto-cached while streaming
+  const wanted=new Set(Object.keys(dl).map(s=>{
+    const bk=DATA.books.find(x=>x.slug===s); return bk?new URL(bk.audio,location.href).pathname:''; }));
+  for(const k of keys) if(!wanted.has(new URL(k.url).pathname)) await c.delete(k,{ignoreVary:true});
+  if(lost){ saveDl(); toast(lost+' download'+(lost>1?'s were':' was')+' cleared by your browser. Re-download to listen offline.'); }
+  saveDl(); render();
+}
 
 let tid; function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(tid);tid=setTimeout(()=>t.hidden=true,2600);}
 window.addEventListener('beforeunload',saveNow);
