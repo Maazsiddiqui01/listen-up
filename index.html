@@ -1,48 +1,58 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0FA0A0"><meta name="robots" content="noindex">
+<meta name="description" content="Deep audio summaries of great books, for the gym and the drive.">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-192.png">
-<title>Listen Up</title><link rel="stylesheet" href="styles.css"></head><body>
-<header class="top"><div class="brand"><span class="logo">🎧</span><b>Listen Up</b></div>
-<div class="tools"><button id="theme" class="icon" title="Theme">🌙</button>
-<button id="install" class="install" hidden>Install</button></div></header>
+<title>Listen Up</title>
+<script>(function(){try{var t=localStorage.getItem('lu-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+document.documentElement.dataset.theme=t;var m=document.querySelector('meta[name=theme-color]');if(m)m.content=t==='dark'?'#0C1719':'#0FA0A0';}catch(e){}})();</script>
+<link rel="stylesheet" href="styles.css"></head><body>
+<a class="skip" href="#lib">Skip to library</a>
+<header class="top"><div class="brand"><span class="logo" aria-hidden="true">🎧</span><b>Listen Up</b></div>
+<div class="tools"><button id="theme" class="icon" type="button" title="Switch theme" aria-label="Switch theme">🌙</button>
+<button id="install" class="install" type="button" hidden>Install</button></div></header>
 <p class="tag" id="tag"></p>
 
 <section id="cont" class="cont" hidden><h2 class="h">Jump back in</h2><div id="contrail" class="rail"></div></section>
 <section id="foryou" class="cont" hidden><h2 class="h">For you</h2><div id="furail" class="rail"></div></section>
 
-<div class="tabs" id="tabs">
-  <button class="tab on" data-t="discover">Discover</button>
-  <button class="tab" data-t="finished">Finished</button>
-  <button class="tab" data-t="downloads">Downloads</button>
+<div class="tabs" id="tabs" role="tablist" aria-label="Library sections">
+  <button class="tab on" type="button" role="tab" aria-selected="true" data-t="discover">Discover</button>
+  <button class="tab" type="button" role="tab" aria-selected="false" data-t="finished">Finished</button>
+  <button class="tab" type="button" role="tab" aria-selected="false" data-t="downloads">Downloads</button>
   <span class="grow"></span>
-  <button id="group" class="grpbtn">▤ By topic</button>
-  <button id="view" class="grpbtn" title="Grid or list view">☰ List</button>
+  <button id="group" class="grpbtn" type="button" aria-pressed="false">▤ By topic</button>
+  <button id="view" class="grpbtn" type="button" aria-pressed="false" title="Grid or list view">☰ List</button>
 </div>
-<div id="chips" class="chips"></div>
-<main id="lib" class="lib"></main>
+<div id="chips" class="chips" role="group" aria-label="Filter by topic"></div>
+<main id="lib" class="lib" tabindex="-1"></main>
 <div class="foot">New titles added weekly · works offline · installable</div>
 
 <div id="mini" class="mini" hidden>
   <div id="mibar" class="mibar"></div>
-  <img id="mcover" alt=""><div class="mmeta"><div id="mtitle"></div><div id="mauthor" class="msub"></div></div>
-  <button id="mplay" class="mplay">▶</button></div>
+  <button id="miopen" class="miopen" type="button" aria-label="Open player">
+    <img id="mcover" alt=""><span class="mmeta"><span id="mtitle"></span><span id="mauthor" class="msub"></span></span>
+  </button>
+  <button id="mplay" class="mplay" type="button" aria-label="Play or pause">▶</button></div>
 
-<section id="player" class="player" hidden>
+<section id="player" class="player" hidden role="dialog" aria-modal="true" aria-label="Now playing">
   <div class="psheet">
-    <button id="close" class="close">▾</button>
+    <button id="close" class="close" type="button" aria-label="Close player"><span aria-hidden="true">▾</span></button>
     <img id="pcover" class="pcover" alt="">
-    <div id="ptitle" class="ptitle"></div><div id="pauthor" class="pauthor"></div>
-    <canvas id="viz" class="viz"></canvas>
-    <input id="seek" class="seek" type="range" min="0" max="1000" value="0">
+    <h2 id="ptitle" class="ptitle"></h2><div id="pauthor" class="pauthor"></div>
+    <canvas id="viz" class="viz" aria-hidden="true"></canvas>
+    <input id="seek" class="seek" type="range" min="0" max="1000" value="0" aria-label="Seek">
     <div class="times"><span id="cur">0:00</span><span id="dur">0:00</span></div>
-    <div class="controls"><button id="back" class="ctl">↺&nbsp;15</button>
-      <button id="play" class="playbig">▶</button><button id="fwd" class="ctl">15&nbsp;↻</button></div>
-    <div class="prow"><button id="speed" class="pill">1×</button>
-      <button id="dl" class="pill">⤓ Download</button></div>
+    <div class="controls"><button id="back" class="ctl" type="button" aria-label="Back 15 seconds">↺&nbsp;15</button>
+      <button id="play" class="playbig" type="button" aria-label="Play or pause">▶</button><button id="fwd" class="ctl" type="button" aria-label="Forward 15 seconds">15&nbsp;↻</button></div>
+    <div class="prow"><button id="speed" class="pill" type="button" aria-label="Playback speed">1×</button>
+      <button id="dl" class="pill" type="button">⤓ Download</button></div>
     <p id="pblurb" class="pblurb"></p>
   </div>
 </section>
 <audio id="audio" preload="metadata" crossorigin="anonymous"></audio>
-<div id="toast" class="toast" hidden></div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 <script src="app.js"></script></body></html>
