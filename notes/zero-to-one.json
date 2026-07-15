@@ -1,0 +1,86 @@
+{
+  "hook": "Peter Thiel likes to open a job interview with one brutal question: what important truth do very few people agree with you on? Struggle to answer it, and you begin to see why building the future is so rare, and so valuable.",
+  "read_min": 9,
+  "sections": [
+    {
+      "h": "The Contrarian Question",
+      "p": [
+        "The book opens with the question Thiel puts to people in interviews: what important truth do very few people agree with you on? It is hard on two levels. Intellectually, because whatever you already know, everyone already knows. And psychologically, because a real answer forces you to say out loud something you believe that the people around you think is false. Brilliant thinking is rare, but courage is even rarer than genius, so most people never manage a true answer. A good one always takes the shape: most people believe X, but the truth is the opposite of X.",
+        "That question frames the whole book, because Thiel's own answer is about progress, and there are two very different kinds. Going from zero to one is vertical progress: doing something genuinely new, taking the world from nothing to something, the way a typewriter becomes a word processor. Going from one to n is horizontal progress: copying what already works and spreading it, which he sums up in a single word, globalization. Our age is obsessed with copying and has half forgotten how to do the new thing.",
+        "This is why he says the next Bill Gates will not build an operating system, and the next Mark Zuckerberg will not build a social network. If you are copying these people, you are not learning from them. Every moment in business happens only once, and the great companies of the future will do something nobody has done before, something we cannot yet name."
+      ]
+    },
+    {
+      "h": "Competition Is For Losers",
+      "p": [
+        "Most people treat competition as healthy. Thiel treats it as something to escape. Picture perfect competition, the economist's ideal: many sellers offering the same product, no one able to set a price, everyone undercutting everyone until profit is ground down to zero. It is like running one of a thousand identical restaurants, everybody exhausted, nobody making real money. In perfect competition, by definition, no company earns a lasting profit.",
+        "At the other end sits monopoly, and Thiel means something precise: not a company that cheated or bribed its way to the top, but one so good at what it does that no rival offers a close substitute. Google in search is the example he returns to. It owns its market, sets its own terms, and earns durable profits. There is even a tell for spotting the truth. A dominant company hides its dominance to dodge regulators, calling itself a small player in a giant market, while a company drowning in competition does the reverse, defining its market as narrowly as possible to look one of a kind.",
+        "And do not moralize about monopoly. A firm locked in cutthroat competition has no slack to think past next quarter, while one that has escaped can afford real research and long bets. Google's search profits are exactly what fund its moonshots. So competition is not the engine of progress. Escaping it is."
+      ],
+      "pull": "Happy companies are all different: each escapes competition by being unique. Failed ones are all the same."
+    },
+    {
+      "h": "The Four Pillars Of Monopoly",
+      "p": [
+        "So how do you build a monopoly? Thiel names four traits. First, proprietary technology that is not ten percent better but ten times better than the nearest substitute, because a small gain gets lost in the noise while an order of magnitude breaks through, the way Google's results and Amazon's catalog did. Second, network effects, where each new user makes the product more valuable, though such a business has to start in a market small enough for the network to take hold when it is still tiny.",
+        "Third, economies of scale, where fixed costs spread over ever larger sales, so software that costs a fortune to write the first time costs almost nothing to copy. Fourth, branding, a monopoly on a feeling, the way Apple commands a premium. But brand is the most superficial pillar and collapses without the other three beneath it, as Marissa Mayer's logo-first attempt to revive Yahoo showed.",
+        "The strategy that follows is counterintuitive: start by dominating a market so small it looks barely worth bothering with, then expand. PayPal began with eBay power sellers, Amazon with books, Facebook with a single college. Own the niche completely, then move into adjacent ground. And forget first mover advantage. What you want is to be the last mover, the one who makes the decisive, durable improvement and holds the market for years, the way a chess grandmaster wins in the endgame."
+      ]
+    },
+    {
+      "h": "The Power Law",
+      "p": [
+        "Thiel calls this the most important pattern in business and in life. We expect a bell curve, where most outcomes cluster near the average and even the extremes sit close to the middle, the way human height works. Startups do not behave like that. They follow a power law, where a tiny handful of outcomes tower into the sky and everything else drops off a cliff toward nothing.",
+        "In venture capital this is the whole game. The best investment in a successful fund typically returns more than every other investment combined, and the second best returns more than all the rest below it. A fund does not win with a tidy, diversified basket of companies that all do fine. It wins on the one or two that go absolutely enormous.",
+        "The lesson cuts against instinct. Because we are trained on bell curves, we want to hedge and diversify and keep our options open. The power law says do the opposite: find the very few things with genuine monopoly potential and pour everything into them. It is personal too. Do not start a company as a hedge, and do not keep a foot in a backup career. The most important things are singular."
+      ],
+      "pull": "In a good fund, the single best investment returns more than all the others combined."
+    },
+    {
+      "h": "Secrets And Solid Foundations",
+      "p": [
+        "Every great company, Thiel argues, is built on a secret: a truth about the world the founder grasps and almost nobody else does yet. Secrets come in two kinds, about nature and about people, and the richest ones are usually about people. Airbnb saw that homeowners would rent rooms to strangers and travelers would sleep in them. Uber and Lyft saw the same hidden willingness to get into strangers' cars. These truths were sitting in plain sight.",
+        "Yet as a culture we have largely stopped believing secrets exist, held back by incrementalism, risk aversion, complacency, and a belief that the world is flat and already fully mapped. That conviction is self fulfilling, because if you do not believe secrets are out there, you will not look, and if you do not look, you will not find them. The best place to search is where no one else is looking.",
+        "A secret still needs a sound company around it, and Thiel's law says a startup broken at its foundation cannot be fixed. Choose co-founders the way you would choose a spouse, because founder conflict is as ruinous as a bad marriage. Keep ownership, possession, and control aligned, keep the board small, and build a real culture. The early PayPal team genuinely liked each other and shared a mission, and its alumni went on to found Tesla, SpaceX, LinkedIn, and YouTube."
+      ]
+    },
+    {
+      "h": "Distribution Is The Product",
+      "p": [
+        "Thiel calls sales and distribution the most underrated part of business, the piece engineers are almost blind to. The fantasy is that a superior product sells itself. It does not. Even a genuinely better product has to be pushed into the world through a real channel, and distribution is not something you bolt on at the end, it is part of the design. Advertising works, especially on the sophisticated people most certain it does not work on them.",
+        "The right method is set by a single number: how much each customer is worth. Deals worth millions need complex sales, where the founder personally closes contracts over months, the way Palantir sells. Smaller deals need a scalable sales force. Cheap or free products that spread person to person need viral marketing, the way PayPal paid users to invite friends and grew exponentially.",
+        "In between lies a trap Thiel calls the dead zone: deals too big for cheap mass marketing but too small to justify a human salesperson, where many businesses quietly die because no method fits. The point across the whole spectrum is to choose the channel that matches your deal size on purpose. Miss that, and you do not have a business, you have a hobby."
+      ],
+      "pull": "If you have invented something new but no way to sell it, you have a bad business."
+    },
+    {
+      "h": "Seven Questions, One Future",
+      "p": [
+        "Thiel distills the book into seven questions every business must answer. Engineering: can you create breakthrough, ten times better technology? Timing: is now the right moment? Monopoly: are you starting with a big share of a small market? People: do you have the right team? Distribution: can you actually deliver and sell? Durability: will your position hold for decades? And secret: have you found something others have missed?",
+        "A great business answers nearly all seven, and a doomed one answers only a couple. Clean technology collapsed in the two thousands because most of those companies failed almost every question: marginal technology, wrong timing, brutal commodity markets, weak teams, no distribution edge, no durability, and no real secret. Tesla answered all seven, from genuine breakthrough engineering to a small beachhead of premium buyers to its own stores and a lasting brand.",
+        "Thiel closes on the founder, an often extreme and contradictory figure whose stubborn conviction is exactly what it takes to believe a secret nobody else believes. His final contrast is between definite optimism, a specific plan to build a better future, and indefinite optimism, a lazy faith that things will simply improve on their own. The future does not just happen. A few people who see a secret and choose to act take the world from zero to one, and it could be you."
+      ]
+    }
+  ],
+  "chart": {
+    "title": "How a venture fund makes its money",
+    "subtitle": "Share of a fund's total returns, by investment rank",
+    "unit": "",
+    "caption": "Illustrative. In a real venture fund the single best investment tends to return more than all the others combined, so a tiny number of winners drive nearly all the value.",
+    "bars": [
+      {"label": "Best investment", "value": 65, "display": "65%"},
+      {"label": "Second best", "value": 20, "display": "20%"},
+      {"label": "Third best", "value": 10, "display": "10%"},
+      {"label": "All the rest combined", "value": 5, "display": "5%"}
+    ]
+  },
+  "takeaways": [
+    "Answer the contrarian question honestly and privately: what important truth do very few people agree with you on? That answer is where your own zero to one begins.",
+    "Stop trying to compete and start trying to escape competition. Ask of any idea whether it is ten times better than what exists, not merely a little better.",
+    "Think small before you think big. Find one specific market you can utterly dominate, win it completely, then expand into adjacent ground.",
+    "Apply the power law: identify the few things that could be exponentially more valuable than all the rest, and pour yourself into those instead of diversifying into mediocrity.",
+    "Go looking for secrets, especially about how people really behave, and look where no one else is looking.",
+    "Get the foundation right: choose co-founders like a spouse, align ownership, possession, and control, and keep the board small.",
+    "Respect distribution as much as product. Decide before you need to how you will reach customers, and match your selling method to your deal size."
+  ]
+}

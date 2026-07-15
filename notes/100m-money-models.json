@@ -1,0 +1,63 @@
+{
+  "hook": "Most businesses do not die because they are unprofitable on paper. They die because they run out of cash before the profit arrives. Money models fix the timing.",
+  "read_min": 8,
+  "sections": [
+    {
+      "h": "The problem is timing, not profit",
+      "p": [
+        "Imagine you spend one hundred dollars to acquire a customer today, and that customer is worth four hundred dollars to you over the next twelve months. On paper you are wildly profitable. In your bank account you are bleeding, because the hundred goes out now and the four hundred trickles in later.",
+        "The faster you grow, the worse this gets. Every new customer is a fresh hole in your cash before it becomes a fountain. This is why healthy, profitable companies still go broke. A money model is simply the sequence of offers and payments you arrange so the cash comes back fast enough to fund the next customer."
+      ],
+      "pull": "Whoever gets their money back fastest can outspend everyone else to acquire the next customer."
+    },
+    {
+      "h": "Get your money back in 30 days",
+      "p": [
+        "The single number the book orbits is how quickly you recover what you spent to acquire a customer. Hormozi's target is to make back more than you spent within roughly the first thirty days. When you hit that, growth stops draining cash and starts funding itself. Acquisition becomes, in effect, free.",
+        "This is client-financed acquisition. The customer's own early payments pay for the cost of finding the next customer. Once that engine spins, you are no longer limited by your bank balance, you are limited only by how many people you can reach."
+      ]
+    },
+    {
+      "h": "The four offers in the sequence",
+      "p": [
+        "A money model is not one offer, it is a choreographed sequence. First the attraction offer, a front-end that gets a stranger to buy the first time, sometimes a liquidating offer priced just to cover your advertising. Then the upsell, presented at the moment of greatest buying momentum, right after the first yes.",
+        "Then the downsell, a smaller, cheaper, or payment-plan version for the people who said no, so you still capture revenue instead of losing them. And finally continuity, the recurring subscription or membership that turns one payment into a predictable stream and lifts lifetime value."
+      ],
+      "pull": "The point of greatest deprivation is right after someone buys. That is when the next yes is easiest."
+    },
+    {
+      "h": "Cash flow beats gross profit",
+      "p": [
+        "Two businesses can earn the identical total profit per customer and have completely different fates. The one that collects sooner can buy more customers sooner, and compounds faster. Speed of cash recovery, not the size of the eventual margin, is what lets you win the auction for attention.",
+        "This is why the book obsesses over payment structure: deposits, upfront annual plans, order bumps. Every day you pull cash forward is a day sooner you can reinvest it."
+      ]
+    },
+    {
+      "h": "Stack the offers, widen the moat",
+      "p": [
+        "When you layer attraction, upsell, downsell, and continuity, two things climb at once: the average revenue per customer, and the speed at which you recover it. Both feed the same flywheel. The business that can afford to pay the most to acquire a customer, and recover it the fastest, can outbid every competitor for the same lead.",
+        "Combine a Grand Slam Offer from the first book, a flood of leads from the second, and a fast-payback money model from this one, and you have the full engine: something to sell, people who know about it, and a structure that turns them into cash before you run out."
+      ]
+    }
+  ],
+  "chart": {
+    "title": "Why fast cash recovery wins",
+    "subtitle": "Two businesses, same $300 lifetime profit per customer, different payback speed",
+    "unit": "",
+    "caption": "Illustrative. The faster-payback business recovers its acquisition cost in month one and reinvests it, compounding growth the slower business cannot match.",
+    "bars": [
+      {"label": "Fast model, day 30", "value": 130, "display": "$130 back"},
+      {"label": "Slow model, day 30", "value": 40, "display": "$40 back"},
+      {"label": "Fast model, day 90", "value": 260, "display": "$260 back"},
+      {"label": "Slow model, day 90", "value": 110, "display": "$110 back"}
+    ]
+  },
+  "takeaways": [
+    "Calculate how long it currently takes to earn back what you spend to acquire one customer. That number is your real growth speed limit.",
+    "Add one upsell immediately after the first purchase, while buying intent is at its peak.",
+    "Add a downsell for the people who say no, so a rejection still produces revenue.",
+    "Introduce a recurring or continuity offer to turn one-time buyers into a predictable cash stream.",
+    "Redesign payment timing to pull cash forward: deposits, annual-upfront discounts, order bumps.",
+    "Aim to recover more than your acquisition cost within the first 30 days, so growth funds itself."
+  ]
+}

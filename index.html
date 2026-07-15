@@ -20,6 +20,15 @@ document.documentElement.dataset.theme=t;var m=document.querySelector('meta[name
   <span id="offtext">You're offline. Showing episodes you've downloaded.</span>
 </div>
 
+<div id="ib" class="ib" hidden>
+  <span class="iblogo" aria-hidden="true">🎧</span>
+  <div class="ibtext"><b id="ibtitle">Install Listen Up</b><span id="ibsub">Add it to your home screen for offline listening and downloads that stick.</span></div>
+  <div class="ibacts">
+    <button id="ibgo" class="ibgo" type="button">Install</button>
+    <button id="ibx" class="ibx" type="button" aria-label="Dismiss">✕</button>
+  </div>
+</div>
+
 <section id="cont" class="cont" hidden><h2 class="h">Jump back in</h2><div id="contrail" class="rail"></div></section>
 <section id="foryou" class="cont" hidden><h2 class="h">For you</h2><div id="furail" class="rail"></div></section>
 
@@ -49,15 +58,19 @@ document.documentElement.dataset.theme=t;var m=document.querySelector('meta[name
     <img id="pcover" class="pcover" alt="">
     <h2 id="ptitle" class="ptitle"></h2><div id="pauthor" class="pauthor"></div>
     <canvas id="viz" class="viz" aria-hidden="true"></canvas>
+    <div id="cc" class="cc" hidden aria-live="polite"><span id="ccnow" class="ccnow"></span></div>
     <input id="seek" class="seek" type="range" min="0" max="1000" value="0" aria-label="Seek">
     <div class="times"><span id="cur">0:00</span><span id="dur">0:00</span></div>
     <div class="controls"><button id="back" class="ctl" type="button" aria-label="Back 15 seconds">↺&nbsp;15</button>
       <button id="play" class="playbig" type="button" aria-label="Play or pause">▶</button><button id="fwd" class="ctl" type="button" aria-label="Forward 15 seconds">15&nbsp;↻</button></div>
     <div class="prow"><button id="speed" class="pill" type="button" aria-label="Playback speed">1×</button>
+      <button id="cctoggle" class="pill" type="button" aria-pressed="false" aria-label="Toggle subtitles">💬 Subtitles</button>
+      <button id="read" class="pill" type="button">📖 Read</button>
       <button id="dl" class="pill" type="button">⤓ Download</button></div>
     <p id="pblurb" class="pblurb"></p>
   </div>
 </section>
+<section id="reader" class="reader" hidden role="dialog" aria-modal="true" aria-label="Read the summary"></section>
 <audio id="audio" preload="metadata" crossorigin="anonymous"></audio>
 <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 <script src="app.js"></script></body></html>

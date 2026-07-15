@@ -1,0 +1,84 @@
+{
+  "hook": "A made up story about a traveler drugged at a hotel bar and waking in a bathtub of ice with a kidney missing has circled the world for years, remembered perfectly by people who heard it once. Your true and important ideas rarely travel that well, and this book hands you the six learnable traits that decide which ideas stick and which ones vanish.",
+  "read_min": 8,
+  "sections": [
+    {
+      "h": "The Curse of Knowledge",
+      "p": [
+        "The villain of the whole book is a single quiet trap. Once you know something, you cannot imagine what it was like not to know it. That sounds harmless, but it is the biggest reason smart, well meaning, expert people are terrible at explaining what they know.",
+        "In 1990 a Stanford student named Elizabeth Newton proved it with a game. Tappers drummed out famous songs like Happy Birthday on a table, and listeners tried to name the tune. Before each guess, the tappers predicted listeners would succeed about half the time. The real success rate was two and a half percent.",
+        "The reason is that the tapper hears the full song playing in their head, while the listener hears only disconnected taps, a strange kind of Morse code. Every time you explain your work, you are the tapper. You have the song, they have the taps, and the curse makes you blame them for not hearing it."
+      ],
+      "pull": "You have the song playing in your head. They only hear the taps."
+    },
+    {
+      "h": "Simple: Find the Core",
+      "p": [
+        "Simple does not mean dumbed down or short for its own sake. It means finding the one thing that matters most and being ruthless about it. Simple equals core plus compact: first find the core, then make it small enough to stick.",
+        "The Army learned that no plan survives contact with the enemy, so it puts a Commander's Intent at the top of every order, the single most important goal in plain language. Cut off and improvising, soldiers still know the one thing that matters. Southwest Airlines ran the same way on one idea: they are THE low fare airline. Would a fancier chicken Caesar salad make them THE low fare airline? No. So it never went on the menu.",
+        "To pack meaning into a few words, borrow a schema the listener already owns. A pomelo is roughly a supersized grapefruit with a thick soft rind, and you understand it instantly. Hollywood pitched Alien as Jaws on a spaceship. A good analogy lets someone lift a whole idea in a single phrase."
+      ]
+    },
+    {
+      "h": "Unexpected: Break the Pattern",
+      "p": [
+        "A simple idea is useless if nobody notices it. Surprise grabs attention by violating expectations, because the brain is a pattern machine that tunes out anything predictable. That is why some airlines rewrote their safety announcements as jokes. People had filed the usual script under ignore, and breaking the pattern made them finally look up at information they had heard a thousand times.",
+        "But surprise fades fast, so to hold attention you need curiosity. The economist George Loewenstein described curiosity as a gap in your knowledge, an itch you cannot rest until you scratch. You open the gap first, making someone feel a specific thing they do not yet know, so they lean in wanting the answer.",
+        "A movie trailer works this way, showing just enough to open a giant question you can only close by buying a ticket. Nordstrom and great teachers do the same, posing a puzzle before handing over the answer. Break a pattern to grab attention, then open a gap to hold it."
+      ]
+    },
+    {
+      "h": "Concrete: Make It Tangible",
+      "p": [
+        "Abstraction is the natural language of experts, and it is where the Curse of Knowledge does its worst damage. The cure is concreteness, something a person can see, touch, hear, or do. Aesop's fable of the fox who cannot reach the grapes and decides they were probably sour gave us \"sour grapes,\" a lesson still perfectly clear after two and a half thousand years. Stated abstractly, that people belittle what they cannot have, it would have vanished long ago.",
+        "Concreteness also lets people coordinate. Boeing did not tell its engineers to build a great new plane. The goal for the 727 was exact: seat one hundred thirty one passengers, fly nonstop from Miami to New York, and land on a specific short runway at LaGuardia. Every engineer could check their own piece against that vivid target, and the pieces fit together.",
+        "The Heaths call it the Velcro theory of memory. Velcro holds because thousands of tiny hooks catch thousands of tiny loops, and an idea sticks when it hooks into things you already know. Say \"bicycle\" and you can picture it, feel the handlebars, smell the summer air. Say \"economic justice\" and there is almost nothing to grab, so the idea slides right off."
+      ],
+      "pull": "The fox and the grapes outlived every abstract version of the lesson."
+    },
+    {
+      "h": "Credible: Help Them Believe",
+      "p": [
+        "People will not act on an idea they do not believe. Authority helps, but the Heaths found that anti authorities can be stronger. Pam Laffin was not a doctor. She was a young mother dying of emphysema who let anti smoking ads show her oxygen tubes and scars, and nobody doubted her, because her credibility came from her suffering.",
+        "Numbers usually fail, because a raw statistic is abstract and has no hooks. They work only when you scale them to something a person can feel. A trillion is just a word, but a million seconds is about eleven days while a trillion seconds runs past thirty thousand years, and suddenly you feel the size of it. Use statistics to illustrate, not to prove.",
+        "Two more tools finish the job. The Sinatra Test says one example, chosen well, can carry everything: guard that famous client and you can guard anyone. Best of all are claims people test themselves. Wendy's asked \"Where's the beef?\" and sent every customer to check a competitor's tiny patty, and Reagan asked voters whether they were better off than they were four years ago, letting each of them run the test in their own life."
+      ]
+    },
+    {
+      "h": "Emotional: Make Them Care",
+      "p": [
+        "People act on what they feel, not on what they merely believe, and we feel for a person while we go numb in front of numbers. Mother Teresa captured it: if she looked at the mass she would never act, but if she looked at the one, she would.",
+        "Researchers proved it. People asked to fight hunger gave more than twice as much when they read about one seven year old girl named Rokia than when they read staggering statistics about millions starving. Then a third group got both, the girl and the numbers, and gave less than the group that got the girl alone. Statistics nudge people into a cold, calculating frame that switches the caring off. This is the identifiable victim effect.",
+        "Identity moves people even more than self interest. Texas could not stop young men from littering with polite pleas to keep the state clean, so it appealed to their pride instead. Tough Texans crushing beer cans and daring anyone to litter, under the slogan Don't Mess with Texas, cut roadside litter dramatically. People do not just ask what is in it for me, they ask what someone like me would do."
+      ],
+      "pull": "If I look at the mass, I will never act. If I look at the one, I will."
+    },
+    {
+      "h": "Stories: The Whole Package",
+      "p": [
+        "A great story is not just the sixth principle, it is a delivery system for all of them at once, naturally concrete and emotional and often unexpected. Stories work as simulation and as inspiration. When you hear one, your mind runs it, rehearsing the situation, and mental rehearsal turns out to be nearly as effective as physical practice.",
+        "That is why Xerox repair technicians learned almost nothing from manuals and everything from swapping war stories over coffee, tales of strange breakdowns and the clever fix that beat them. For inspiration, Stephen Denning could not move the World Bank with charts, so he told one small true story of a health worker in Zambia in 1995 who found a malaria answer on a distant website. That springboard story let listeners leap to picturing their own organization doing the same.",
+        "The most famous example is Jared, the man who lost hundreds of pounds eating Subway sandwiches. His story is simple, unexpected, concrete, credible, emotional, and a story, all six at once, with no engineering required. Find the right true story and you get the entire framework in a single package. And the deepest lesson of the book is that none of this is a gift. Stickiness is a set of traits you can learn and build on purpose."
+      ]
+    }
+  ],
+  "chart": {
+    "title": "Tapper predictions vs reality",
+    "subtitle": "Elizabeth Newton's 1990 experiment, 120 famous songs tapped out on a table",
+    "unit": "",
+    "caption": "Illustrative of the Curse of Knowledge. Tappers heard the full song in their heads and predicted listeners would name about half. Listeners heard only bare taps and named almost none.",
+    "bars": [
+      {"label": "Songs tapped out in the study", "value": 120, "display": "120 songs"},
+      {"label": "Correct guesses the tappers predicted", "value": 60, "display": "60 (50%)"},
+      {"label": "Correct guesses the listeners got", "value": 3, "display": "3 (2.5%)"}
+    ]
+  },
+  "takeaways": [
+    "Force your idea into a single sentence, the way the Army writes a Commander's Intent. If it will not fit in one sentence, you have not found the core yet.",
+    "Catch yourself being the tapper. The next time you feel impatient that someone does not get it, assume the gap is yours to close, not theirs.",
+    "Make it concrete. Attach the idea to something a person can picture, your own pomelo or fox and grapes, instead of words like synergy or alignment.",
+    "Lead with one person, not a statistic. Find your Rokia, the single identifiable individual whose story makes people feel what you want them to feel, and do not smother it in data.",
+    "Open a gap before you fill it. Pose the question or puzzle first so people feel the itch of wanting to know, then give them the answer.",
+    "Find the true story you already have, your Jared or your Zambian health worker, and let it carry all six traits at once. Then test it on one person who does not know it, and watch whether the light goes on."
+  ]
+}

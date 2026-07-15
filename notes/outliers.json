@@ -1,0 +1,83 @@
+{
+  "hook": "We love the story of the self-made genius who grabbed his own bootstraps and pulled. This book quietly proves that nobody pulls alone, and that most of what we call talent was handed to the outlier long before he earned it.",
+  "read_min": 9,
+  "sections": [
+    {
+      "h": "The Myth Of The Self-Made",
+      "p": [
+        "Gladwell's whole argument is that we tell the story of success wrong. We treat it as something that grows entirely inside a person, from talent and brains and grit. But the true outliers, the statistical freaks of achievement, are almost always the beneficiaries of things they did not create: hidden advantages, rare opportunities, lucky timing, and cultural legacies handed down before they were even born.",
+        "He opens in Roseto, a Pennsylvania town of Italian immigrants who almost never got heart disease in an era when heart attacks were the number one killer of men. It was not their diet, they fried sausage in lard. It was not genes, relatives elsewhere died at the normal rate. It was not the region, neighboring towns had triple the deaths. It was the community itself: three generations under one roof, 22 civic groups in a town of under 2,000, nobody flaunting wealth. To explain their health you had to stop staring at the individual and look at the world around them."
+      ]
+    },
+    {
+      "h": "Hockey And The Matthew Effect",
+      "p": [
+        "A psychologist named Roger Barnsley noticed that the birthdays of Canada's best young hockey players were absurdly lopsided, a huge share born in January, February, and March and very few late in the year. The reason is coldly logical. The age cutoff is January 1, so a boy born January 2 and one born December 31 land in the same league nearly a year apart, and at nine or ten a year is an eternity. Coaches think they are spotting talent. They are really spotting the older, bigger, more coordinated kids.",
+        "Those kids get the elite team, the better coaching, 75 games a season instead of 20, and stronger teammates, and a tiny accident of birth month snowballs into a real skill gap. Gladwell borrows a line from the Gospel of Matthew: to those who have, more is given. We mistake accumulated advantage for innate talent. The same relative-age effect shows up in school, where the oldest kids in a grade outperform the youngest for years."
+      ],
+      "pull": "We look at the hockey star and call him a natural. He was made, step by step, by a system that kept handing him the next chance."
+    },
+    {
+      "h": "The Ten Thousand Hour Rule",
+      "p": [
+        "Studying violinists at a Berlin academy, Anders Ericsson found no naturals who floated to the top and no grinds who worked hard but lacked the gift. Everyone started around age five, and the futures diverged purely on hours. By age 20 the elite had logged about 10,000 hours of practice, the merely good about 8,000, and the future music teachers about 4,000. Roughly ten years of hard, deliberate practice is what greatness seems to cost.",
+        "But 10,000 hours is more than a young person can produce alone. You need supportive parents, enough money that you are not working just to survive, and above all the chance to practice that much. The Beatles got theirs in Hamburg, where the clubs demanded eight-hour nights, so by their first real success they had played live around 1,200 times, more than most bands manage in a career. Bill Gates got his at Lakeside, where a mothers' club rummage sale bought a computer terminal in 1968, then programmed nonstop for seven years, sneaking into a university lab to code from 3 to 6 in the morning."
+      ]
+    },
+    {
+      "h": "The Trouble With Geniuses",
+      "p": [
+        "Chris Langan may be the smartest man in America, with an IQ near 195, higher than Einstein's. He spoke at six months and taught himself to read at three. He also spent much of his life working as a bar bouncer. Gladwell's explanation is the threshold: past roughly an IQ of 120, more points stop translating into more real-world achievement. A scientist with a 130 IQ is about as likely to win a Nobel as one with 180. Being smart enough is enough, and after that other things take over.",
+        "What Langan lacked was practical intelligence, knowing what to say to whom, how to read a situation, how to make a system bend for you. It is not innate, it is learned, usually from family. Langan grew up in poverty with violent stepfathers, and when his college fumbled his financial aid he had never been taught to push back, so the system crushed him. Contrast Robert Oppenheimer, who as a student tried to poison his tutor, talked his way into mere probation, and later talked his way into running the atomic bomb project. Same raw brilliance, opposite skill at working people.",
+        "The sociologist Annette Lareau found the real dividing line was class, not race. Middle-class parents practice concerted cultivation: they reason, negotiate, and teach children to question adults and demand what they need, a sense of entitlement in the good sense. Working-class kids learn distance and deference toward institutions. Neither style makes a better person, but one quietly hands children the toolkit for getting what they want out of schools, workplaces, and bureaucracies."
+      ]
+    },
+    {
+      "h": "Right Place, Right Time",
+      "p": [
+        "Line up the titans of computing and the birthdays cluster eerily. Bill Gates and Steve Jobs, 1955. Paul Allen, 1953. Steve Ballmer, 1956. Eric Schmidt, 1955. Bill Joy, 1954. The personal computer era really began in January 1975 with the Altair. Born too early and you had a mortgage and a safe corporate job to protect. Born too late and you missed the wave. The sweet spot was to be about 20 in 1975, which means being born around 1954 or 1955.",
+        "The same thing happened a century earlier. A startling share of the richest Americans in history were born in one nine-year window in the 1830s, including Rockefeller in 1839 and Carnegie in 1835, because they hit their prime exactly as the railroads, Wall Street, and industry remade the economy. You did not just have to be a genius. You had to be a genius who came of age at the exact hinge of history.",
+        "Joe Flom shows the flip side. As a Jewish lawyer in the 1950s he was shut out of the white-shoe firms, so he took the work they found distasteful, hostile takeovers and proxy fights. When the takeover boom exploded in the 1980s he was the world's master of the one skill everyone suddenly needed. His disadvantage had forced him into a gold mine, and his garment-worker parents had modeled meaningful work: autonomy, complexity, and a real link between effort and reward."
+      ],
+      "pull": "You did not just have to be a genius. You had to be a genius who came of age at the exact hinge of history."
+    },
+    {
+      "h": "The Legacies We Inherit",
+      "p": [
+        "Cultures hand down legacies that outlive their origins. In Harlan, Kentucky, families like the Howards and the Turners waged deadly feuds, part of a wider Appalachian pattern that Gladwell traces to a Scots-Irish culture of honor, where herders learned to answer any insult with force. Generations later, long after the herds were gone, the reflex to defend one's honor with violence remained.",
+        "A gentler legacy turned deadly in the cockpit. Korean Air had an alarming crash rate in the 1990s, not from bad planes or poorly trained pilots but from communication. Korea's legacy of high power distance, a deep respect for seniority, made a junior officer unable to bluntly tell a tired captain he was about to crash. On the 1997 approach to Guam the crew offered softened, mitigated hints instead of a clear warning, and the plane flew into a hillside.",
+        "The hopeful part is what the airline did next. It did not blame Korean culture, it worked around it. It made English the working language of the cockpit, giving crews a way to step outside the web of honorifics and speak directly, and it trained everyone to speak up. Korean Air became a perfectly safe airline. Cultural legacies shape us in ways we barely notice, but once we name them we are not their prisoners."
+      ]
+    },
+    {
+      "h": "Rice Paddies And Second Chances",
+      "p": [
+        "Why are children from some Asian cultures so strong at math? Partly language: Chinese number words are short and logical, where eleven is literally ten-one and twenty-four is two-tens-four, so the base-ten logic is transparent to a four-year-old. Partly the rice paddy: wet-rice farming rewarded relentless, year-round, careful effort, and out of it came proverbs like the one promising that anyone who can rise before dawn 360 days a year will make his family rich. Math rewards exactly that persistence, and studies show the students most willing to grind through a boring questionnaire also score best on the test.",
+        "The same insight rescues poor kids. Research on the achievement gap found that during the school year poor and rich children learn at almost the same rate. The gap opens over the summer, when wealthier kids keep learning at camps and museums while poorer kids lose ground, and it accumulates year after year, exactly like the hockey birthdays. The gap is largely a summer gap, a difference in opportunity outside the classroom.",
+        "So the KIPP schools simply added time: days from 7:30 to 5, some Saturdays, shorter summers, up to 50 or 60 percent more learning. Children who arrive behind grade level end up bound for college. Twelve-year-old Marita is up before dawn and doing homework until 11 at night, and Gladwell calls it Marita's bargain, trading an ordinary childhood for a real shot at a different future. She did not need a miracle or a genius IQ. She needed the ladder that wealthier kids get for free."
+      ],
+      "pull": "The potential was never the scarce thing. The opportunity was. And opportunity, unlike talent, is something we can choose to give."
+    }
+  ],
+  "chart": {
+    "title": "Where the young hockey stars were born",
+    "subtitle": "Birthdays of elite Canadian junior players, split by quarter of the year",
+    "unit": "",
+    "caption": "Illustrative. The age cutoff is January 1, so the oldest boys in each cohort get picked, coached, and developed first, and a birth month quietly compounds into a career.",
+    "bars": [
+      {"label": "January to March", "value": 40, "display": "40%"},
+      {"label": "April to June", "value": 30, "display": "30%"},
+      {"label": "July to September", "value": 20, "display": "20%"},
+      {"label": "October to December", "value": 10, "display": "10%"}
+    ]
+  },
+  "takeaways": [
+    "List the real breaks behind your own wins, the timing, the people, the access, so you stop crediting talent alone and start seeing the scaffolding.",
+    "Before you judge anyone as a natural or a failure, look for the accumulated advantages, or missing ones, stacked up behind their performance.",
+    "Pick one skill and protect daily hours for it, and just as deliberately engineer the chance to practice, because effort only compounds when opportunity lets it.",
+    "Build practical intelligence: this week, ask an institution or a person in power directly and specifically for something you want, and coach your kids to do the same.",
+    "When something important is going wrong, drop the polite, mitigated hints and say the one clear sentence out loud, especially to someone senior.",
+    "Give a disadvantaged kid more time on task, a tutor, a richer summer, extra hours, because the gap you are fighting is mostly a gap in opportunity.",
+    "Look for the corner of your field that everyone else considers beneath them, because that neglected work can become tomorrow's most valuable skill."
+  ]
+}

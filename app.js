@@ -48,6 +48,7 @@ async function load(){
   $('#view').onclick=()=>{listView=!listView;localStorage.setItem('lu-view',listView?'list':'grid');setViewBtn();render();};
   setViewBtn();
   $('#speed').textContent=SPEEDS[si]+'×';
+  applyCcBtn();
   applyOffline();
   if(offline) showDownloads(); else render();   // offline? land straight on Downloads, Netflix-style
   if(!offline) pullRemote();                    // merge in progress from other devices
@@ -124,12 +125,13 @@ function card(b){
   const label = b.status!=='ready' ? `${b.title} by ${b.author}, coming soon`
     : off ? `${b.title} by ${b.author}, not downloaded, unavailable offline`
     : `Play ${b.title} by ${b.author}, ${b.duration}`;
+  const readbtn = (b.status==='ready'&&b.notes)?`<button class="readbtn" data-read="${b.slug}" type="button" aria-label="Read the summary of ${esc(b.title)}">📖</button>`:'';
   return `<article class="bk ${b.status}${off?' unavail':''}" data-slug="${b.slug}" role="button" tabindex="0" aria-label="${esc(label)}">
     <div class="cw"><img src="${cover}" alt="" decoding="async" onerror="this.style.opacity=0">${badge}
-    ${playable(b)?'<div class="play" aria-hidden="true">▶</div>':''}${pbar}</div>
+    ${playable(b)?'<div class="play" aria-hidden="true">▶</div>':''}${readbtn}${pbar}</div>
     <div class="bkmeta"><h3>${esc(b.title)}</h3><div class="au">${esc(b.author)}</div>
     <div class="blurb">${esc(b.blurb||'')}</div>
-    <div class="mrow"><span>${esc(b.genre)}</span>${b.duration?`<span>${b.duration}</span>`:''}${dl[b.slug]?'<span class="dlpill">⤓ Saved</span>':''}</div></div></article>`;
+    <div class="mrow"><span>${esc(b.genre)}</span>${b.duration?`<span>${b.duration}</span>`:''}${b.notes?'<span class="readpill">📖 Read</span>':''}${dl[b.slug]?'<span class="dlpill">⤓ Saved</span>':''}</div></div></article>`;
 }
 
 function render(){
@@ -152,14 +154,21 @@ function render(){
   } else $('#lib').innerHTML=books.map(card).join('');
   bind();
 }
-function bind(){ document.querySelectorAll('.bk').forEach(el=>{
-  const go=()=>{const b=DATA.books.find(x=>x.slug===el.dataset.slug);
-    if(b.status!=='ready'){ toast('“'+b.title+'” drops this week 🎧'); return; }
-    if(!playable(b)){ toast('Not downloaded. Connect to the internet to stream it.'); return; }
-    openBook(b);};
-  el.onclick=go;
-  el.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); } };
-}); }
+function bind(){
+  document.querySelectorAll('.bk .readbtn').forEach(rb=>{ rb.onclick=e=>{ e.stopPropagation();
+    const b=DATA.books.find(x=>x.slug===rb.dataset.read); if(b) openReader(b); }; });
+  document.querySelectorAll('.bk').forEach(el=>{
+    const go=()=>{const b=DATA.books.find(x=>x.slug===el.dataset.slug);
+      if(b.status!=='ready'){ toast('“'+b.title+'” drops this week 🎧'); return; }
+      if(!playable(b)){
+        if(b.notes){ openReader(b); toast('Offline: showing the written summary.'); }  // reading still works offline
+        else toast('Not downloaded. Connect to the internet to stream it.');
+        return; }
+      openBook(b);};
+    el.onclick=go;
+    el.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); } };
+  });
+}
 
 // ---- player ----
 // The player is a modal sheet. On mobile the hardware / gesture Back must dismiss
@@ -191,7 +200,8 @@ function closePlayer(){
   render();
 }
 window.addEventListener('popstate',()=>{
-  if(sheetOpen){ hideSheet(); if(!poppingBack) render(); }
+  if(readerOpen){ hideReader(); }
+  else if(sheetOpen){ hideSheet(); if(!poppingBack) render(); }
   poppingBack=false;
 });
 
@@ -210,7 +220,116 @@ function openBook(b){
   audio.addEventListener('loadedmetadata',start);
   audio.play().catch(()=>{});
   setMediaSession(b);
+  loadCaptions(b);
+  $('#cctoggle').hidden=!b.caps;          // subtitles only when a track exists
+  $('#read').hidden=!b.notes;             // Read only when notes exist
 }
+
+// ---- live subtitles ----
+let caps=null, capIdx=-1, capOn=localStorage.getItem('lu-cc')==='1';
+function applyCcBtn(){ const t=$('#cctoggle'); t.classList.toggle('done',capOn); t.setAttribute('aria-pressed',capOn);
+  t.textContent=capOn?'💬 Subtitles on':'💬 Subtitles'; $('#cc').hidden=!capOn; }
+async function loadCaptions(b){
+  caps=null; capIdx=-1; $('#ccnow').textContent=''; $('#cctoggle').hidden=false;
+  if(!capOn) return;
+  fetchCaptions(b.slug);
+}
+async function fetchCaptions(slug){
+  try{ const r=await fetch('captions/'+slug+'.json',{cache:'force-cache'});
+    if(!r.ok){ caps=[]; $('#cctoggle').hidden=true; return; }   // no track for this book
+    const j=await r.json(); if(cur&&cur.slug===slug){ caps=j.cues||[]; capIdx=-1; syncCaption(true); }
+  }catch(e){ caps=[]; }
+}
+function syncCaption(force){
+  if(!capOn||!caps||!caps.length) return;
+  const t=audio.currentTime;
+  // fast path: usually just advance to the next cue
+  let i=capIdx;
+  if(i<0||force||t<caps[i].t||(caps[i+1]&&t>=caps[i+1].t)){
+    // binary search for the cue whose start <= t
+    let lo=0,hi=caps.length-1,best=0;
+    while(lo<=hi){ const m=(lo+hi)>>1; if(caps[m].t<=t){best=m;lo=m+1;} else hi=m-1; }
+    i=best;
+  }
+  if(i!==capIdx){ capIdx=i; const c=caps[i];
+    const shown=(t>=c.t && t<=c.t+c.d+0.4)?c.x:(t<caps[0].t?'':caps[i].x);
+    $('#ccnow').textContent=shown; }
+}
+$('#cctoggle').onclick=()=>{ capOn=!capOn; localStorage.setItem('lu-cc',capOn?'1':'0'); applyCcBtn();
+  if(capOn){ if(cur){ if(caps&&caps.length){ syncCaption(true);} else fetchCaptions(cur.slug); } }
+};
+
+// ---- Read view (beautiful long-form notes) ----
+let readerOpen=false, notesCache={};
+const escR=esc;
+function chartHTML(ch){
+  if(!ch||!ch.bars||!ch.bars.length) return '';
+  const max=Math.max(...ch.bars.map(b=>Math.abs(+b.value)||0))||1;
+  const rows=ch.bars.map(b=>{const v=+b.value||0; const pct=Math.max(2,Math.round(Math.abs(v)/max*100));
+    return `<div class="rdrow"><span class="rdlab">${escR(b.label)}</span>
+      <span class="rdtrack"><span class="rdfill" style="width:${pct}%"></span></span>
+      <span class="rdval">${escR(b.display||(v+(ch.unit||'')))}</span></div>`;}).join('');
+  return `<div class="rdchart"><div class="rdch-t">${escR(ch.title||'')}</div>
+    ${ch.subtitle?`<div class="rdch-s">${escR(ch.subtitle)}</div>`:''}
+    <div class="rdbars">${rows}</div>
+    ${ch.caption?`<div class="rdcap">${escR(ch.caption)}</div>`:''}</div>`;
+}
+function renderReader(b,n){
+  const readMin=n.read_min||Math.max(4,Math.round((JSON.stringify(n).length)/1100));
+  const kicker=`${escR(b.genre)} · ${readMin} min read`;
+  let secs='';
+  (n.sections||[]).forEach((s,i)=>{
+    const paras=(s.p||[]).map(p=>`<p>${escR(p)}</p>`).join('');
+    const pull=s.pull?`<div class="rdpull">${escR(s.pull)}</div>`:'';
+    const chart=s.chart?chartHTML(s.chart):'';
+    secs+=`<section class="rdsec"><span class="rdnum">${String(i+1).padStart(2,'0')}</span>
+      <h3>${escR(s.h||'')}</h3>${paras}${pull}${chart}</section>`;
+  });
+  const chart = n.chart?chartHTML(n.chart):'';
+  const keys=(n.takeaways&&n.takeaways.length)
+    ? `<div class="rdkey"><h4>Do this this week</h4><ul>${n.takeaways.map(t=>`<li>${escR(t)}</li>`).join('')}</ul></div>`:'';
+  return `<div class="rdbar">
+      <button class="rdback" id="rdclose" type="button"><span aria-hidden="true">←</span> Library</button>
+      <span class="rdt">${escR(b.title)}</span>
+      <button class="rdplay" id="rdplay" type="button">▶ Listen</button>
+    </div>
+    <article class="rdwrap">
+      <header class="rdhero">
+        <div class="rdkicker">${kicker}</div>
+        <h1 class="rdtitle">${escR(b.title)}</h1>
+        <div class="rdauthor">by ${escR(b.author)}</div>
+        <div class="rdmeta"><span>${escR(b.genre)}</span>${b.duration?`<span>🎧 ${escR(b.duration)} listen</span>`:''}<span>📖 ${readMin} min read</span></div>
+      </header>
+      ${n.hook?`<div class="rdhook">${escR(n.hook)}</div>`:''}
+      ${chart}
+      ${secs}
+      ${keys}
+      <div class="rdend">You just read the summary of <b>${escR(b.title)}</b>. Want it in your ears? <b>Tap Listen.</b></div>
+    </article>`;
+}
+async function openReader(b){
+  const host=$('#reader');
+  host.innerHTML='<div class="rdbar"><button class="rdback" id="rdclose" type="button"><span aria-hidden="true">←</span> Library</button><span class="rdt">Loading…</span></div><div class="rdwrap"><p style="color:var(--sub)">Loading the summary…</p></div>';
+  showReader();
+  $('#rdclose').onclick=closeReader;
+  let n=notesCache[b.slug];
+  if(!n){ try{ const r=await fetch('notes/'+b.slug+'.json',{cache:'force-cache'});
+    if(!r.ok) throw 0; n=await r.json(); notesCache[b.slug]=n; }catch(e){
+      host.innerHTML='<div class="rdbar"><button class="rdback" id="rdclose" type="button"><span aria-hidden="true">←</span> Library</button></div><div class="rdwrap"><p style="color:var(--sub)">The written summary for this title is not ready yet. It is on the way.</p></div>';
+      $('#rdclose').onclick=closeReader; return; } }
+  host.innerHTML=renderReader(b,n);
+  host.scrollTop=0;
+  $('#rdclose').onclick=closeReader;
+  $('#rdplay').onclick=()=>{ closeReader(); openBook(b); };
+}
+function showReader(){ if(readerOpen) return; readerOpen=true; $('#reader').hidden=false;
+  history.pushState({lu:'reader'},''); document.body.style.overflow='hidden'; }
+function hideReader(){ readerOpen=false; $('#reader').hidden=true; document.body.style.overflow=''; }
+function closeReader(){
+  if(readerOpen && history.state && history.state.lu==='reader'){ poppingBack=true; history.back(); }
+  else hideReader();
+}
+$('#read').onclick=()=>{ if(cur){ audio.pause(); openReader(cur); } };
 
 // lock-screen / headset / car-stereo controls: essential for gym and driving
 function setMediaSession(b){
@@ -238,6 +357,7 @@ audio.ontimeupdate=()=>{ if(!audio.duration)return;
   if(!seeking) $('#seek').value=1000*audio.currentTime/audio.duration;
   $('#cur').textContent=fmt(audio.currentTime); $('#dur').textContent=fmt(audio.duration);
   $('#mibar').style.width=(100*audio.currentTime/audio.duration)+'%';
+  if(capOn) syncCaption(false);
   if(cur && (Date.now()-lastSave>4000)) saveNow(); };
 audio.onended=()=>{ if(cur){prog[cur.slug]={t:0,dur:audio.duration,done:true,u:Date.now()};saveProg();pushRemote(true);render();toast('Finished ✓ moved to your Finished shelf');} };
 // a failed load used to do nothing at all; say so, and self-heal a bad download
@@ -283,16 +403,22 @@ function initViz(){ if(AC!==undefined) return; try{
 function startViz(){ initViz(); if(AC&&AC.state==='suspended') AC.resume(); if(!rafId) vizLoop(); }
 function stopViz(){ if(rafId){cancelAnimationFrame(rafId);rafId=null;} }
 function vizLoop(){
-  const cv=$('#viz'), ctx=cv.getContext('2d'), dpr=window.devicePixelRatio||1;
-  cv.width=cv.clientWidth*dpr; cv.height=cv.clientHeight*dpr;
-  const W=cv.width, H=cv.height, n=44, gap=3*dpr, bw=(W-(n-1)*gap)/n;
-  function draw(){ rafId=requestAnimationFrame(draw); ctx.clearRect(0,0,W,H);
+  const cv=$('#viz'), ctx=cv.getContext('2d'), dpr=window.devicePixelRatio||1, n=44;
+  function draw(){ rafId=requestAnimationFrame(draw);
+    // measure per-frame: the canvas may have zero width the instant the sheet opens
+    const cw=cv.clientWidth, chh=cv.clientHeight;
+    if(cw<=0||chh<=0){ return; }                 // not laid out yet, skip this frame
+    if(cv.width!==Math.round(cw*dpr)){ cv.width=cw*dpr; cv.height=chh*dpr; }
+    const W=cv.width, H=cv.height, gap=3*dpr, bw=(W-(n-1)*gap)/n;
+    if(bw<=0){ return; }                          // too narrow to draw safely
+    ctx.clearRect(0,0,W,H);
     let vals;
     if(analyser){ analyser.getByteFrequencyData(bins);
       vals=Array.from({length:n},(_,i)=>bins[Math.floor(i/n*bins.length*0.72)]/255); }
     else { const on=!audio.paused; vals=Array.from({length:n},(_,i)=>on?(0.18+0.55*Math.abs(Math.sin(Date.now()/220+i*0.5))):0.05); }
     const acc=getComputedStyle(document.documentElement).getPropertyValue('--acc').trim();
-    for(let i=0;i<n;i++){ const h=Math.max(H*0.07, vals[i]*H*0.92), x=i*(bw+gap), y=(H-h)/2, r=bw/2;
+    const r=Math.max(0,bw/2);
+    for(let i=0;i<n;i++){ const h=Math.max(H*0.07, vals[i]*H*0.92), x=i*(bw+gap), y=(H-h)/2;
       ctx.fillStyle=acc; ctx.beginPath();
       if(ctx.roundRect) ctx.roundRect(x,y,bw,h,r); else ctx.rect(x,y,bw,h); ctx.fill(); } }
   draw();
@@ -471,11 +597,40 @@ async function reconcileDownloads(){
 
 let tid; function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(tid);tid=setTimeout(()=>t.hidden=true,2600);}
 window.addEventListener('beforeunload',saveNow);
-let deferred; window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;$('#install').hidden=false;});
-$('#install').onclick=async()=>{ if(!deferred)return; deferred.prompt(); await deferred.userChoice; deferred=null; $('#install').hidden=true; };
-// Chrome grants durable storage to INSTALLED apps, so ask again the moment we're installed
+// ---- install prompt ----
+let deferred;
+const isIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent)&&!window.MSStream;
+const ibDismissed=()=>localStorage.getItem('lu-ib')==='1';
+function showInstallBanner(){
+  if(standalone()||ibDismissed()) return;
+  const ib=$('#ib');
+  if(deferred){                                   // Android/Chrome: real prompt available
+    ib.classList.remove('ios');
+    $('#ibsub').textContent='Add it to your home screen for offline listening and downloads that stick.';
+    $('#ibgo').hidden=false;
+    ib.hidden=false;
+  } else if(isIOS()){                              // iOS Safari: no prompt event, show steps
+    ib.classList.add('ios');
+    $('#ibgo').hidden=true;
+    $('#ibsub').innerHTML='Tap the Share button <span class="g">⎋</span> below, then <b>Add to Home Screen</b>, to save it and keep your downloads.';
+    ib.hidden=false;
+  }
+  // other desktop browsers: leave it hidden, the header Install button covers it
+}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;$('#install').hidden=false;showInstallBanner();});
+async function runInstall(){
+  if(!deferred) return;
+  $('#ib').hidden=true;
+  deferred.prompt();
+  await deferred.userChoice; deferred=null; $('#install').hidden=true;
+}
+$('#install').onclick=runInstall;
+$('#ibgo').onclick=runInstall;
+$('#ibx').onclick=()=>{ localStorage.setItem('lu-ib','1'); $('#ib').hidden=true; };
+// iOS never fires beforeinstallprompt, so decide on load
+if(!standalone() && isIOS()) setTimeout(showInstallBanner,1200);
 window.addEventListener('appinstalled',async()=>{
-  $('#install').hidden=true;
+  $('#install').hidden=true; $('#ib').hidden=true; localStorage.setItem('lu-ib','1');
   const granted=await askPersist();
   toast(granted?'Installed. Your downloads are now permanent ✓':'Installed ✓');
   render();

@@ -1,0 +1,82 @@
+{
+  "hook": "Two characters share your skull: a fast one who has an answer before you finish the question, and a slow one who is smart but bone lazy. Learn to tell them apart and you can start to catch your own mind in the act of fooling you.",
+  "read_min": 9,
+  "sections": [
+    {
+      "h": "Two Systems, One Lazy Boss",
+      "p": [
+        "Daniel Kahneman, a psychologist who won the Nobel Prize in economics, says your mind runs on two systems. System 1 is fast, automatic, and involuntary. See an angry face and you know it is angry before you decide to look. Hear two plus two and a number simply appears. System 2 is the slow one. Ask it for seventeen times twenty-four and nothing appears; you have to stop, concentrate, and grind through the steps. If you were walking while you multiplied, you would probably stop walking, because hard thinking and brisk movement draw on the same limited budget.",
+        "Here is the fateful arrangement between them. System 1 runs nonstop, throwing up impressions and intuitions, and System 2 mostly idles in low-effort mode, endorsing those suggestions with barely a glance. Usually that works, because System 1 is remarkably good. But it means our inner supervisor is lazy, and that laziness is the crack most errors slip through. Consider the puzzle: a bat and ball cost a dollar and ten cents, the bat costs a dollar more than the ball, so how much is the ball? Ten cents leaps to mind. It is wrong; the ball costs five cents. More than half of students at Harvard, MIT, and Princeton gave the ten-cent answer, because System 1 produced it confidently and lazy System 2 never checked.",
+        "System 1 also has a favorite mood, which Kahneman calls cognitive ease. When something is easy to process, a clear font, a familiar name, a rhyme, a repeated claim, your mind relaxes and starts to trust it. This is why repetition breeds belief: say a thing often enough and its familiarity feels like truth. The reverse is stranger. When researchers printed those tricky puzzles in a faint, hard-to-read font, more people got them right, because the strain woke System 2 up. Making a problem a little harder to read can make you think about it better."
+      ],
+      "pull": "An answer that feels certain and a lazy supervisor who waves it through. That, in miniature, is the whole book."
+    },
+    {
+      "h": "Jumping To Conclusions",
+      "p": [
+        "System 1 is a storyteller with one fatal habit: it works only with the information in front of it. Kahneman gives this an ugly, unforgettable acronym, WYSIATI, What You See Is All There Is. Your mind does not ask what is missing. It takes whatever scraps it has, builds the most coherent story it can, and then feels confident in proportion to how neat that story is, not how complete the evidence is. Hear that Julie is intelligent and strong and a favorable impression forms instantly, even though the next words could just as easily have been corrupt and cruel.",
+        "This is the engine of the halo effect. Meet someone warm and charming at a party and you will quietly assume they are also generous, competent, and clever, traits you have no evidence for at all. One good quality throws a glow over everything else, and one bad first impression darkens all that follows. We build full, confident portraits of people and situations from a sliver of data, and the frightening part is that we never feel the size of the gaps in what we actually know."
+      ]
+    },
+    {
+      "h": "Anchors And Available Fears",
+      "p": [
+        "The first great shortcut is anchoring, and it is bizarre how powerful it is. A number that lands in your head before you estimate will drag your guess toward it, even when the number is plainly random. Kahneman and Tversky rigged a wheel of fortune to stop only on ten or sixty-five, spun it, then asked what percentage of United Nations countries are in Africa. People who saw ten guessed about twenty-five percent; people who saw sixty-five guessed about forty-five. A number they had watched a wheel produce nearly doubled their answer. This is not a lab curiosity: show real estate agents the same house with different listing prices and their appraisals move with the price, every one of them swearing they ignored it.",
+        "The second shortcut is availability: to judge how common something is, System 1 checks how easily examples come to mind rather than running the numbers. That is why our fears are so badly calibrated. We dread plane crashes, sharks, and terrorist attacks, which are vivid and heavily reported, while barely worrying about the car accidents, strokes, and diabetes far more likely to kill us. A single shark attack becomes a national story and reshapes how millions feel about the ocean. The same bias runs through daily life: ask a husband and wife separately what share of the housework each does and the two figures reliably add up to well over a hundred percent, because your own efforts are simply easier to recall than your partner's."
+      ],
+      "pull": "We fear what is memorable, not what is likely."
+    },
+    {
+      "h": "The Linda Problem",
+      "p": [
+        "Now the richest vein in the book: representativeness, System 1's habit of judging probability by resemblance instead of by odds. Meet Linda, thirty-one, single, outspoken, a former philosophy student passionate about social justice who once marched against nuclear weapons. Which is more probable, that Linda is a bank teller, or that she is a bank teller and active in the feminist movement? Most people, including trained statisticians, pick the second, because it fits the story. But it cannot be more likely, since every feminist bank teller is already a bank teller. Adding a detail can only shrink the odds, never raise them. This is the conjunction fallacy: a rich, specific story feels more probable than a plain one, even when logic screams otherwise.",
+        "The same blindness shows up as base-rate neglect. Describe Tom W. as tidy, a bit dull, and fond of science fiction, and people confidently file him under computer science, ignoring that far more students study the humanities than programming. The rarity of the category should shape the guess, and it gets thrown away. Kahneman sharpens it with a cab problem: eighty-five percent of a city's cabs are Green and fifteen percent are Blue, a witness who is right eighty percent of the time says the hit-and-run cab was Blue, so how likely is it that it truly was? Most people say eighty percent and ignore that Blue cabs are rare. Combine the two properly and the real answer is about forty-one percent, less than half. The vivid witness bulldozes the statistics. The lesson is that the more vivid and specific a scenario is, the more convincing it feels, and often the less likely it actually is."
+      ]
+    },
+    {
+      "h": "Regression And False Confidence",
+      "p": [
+        "Kahneman's favorite story is about Israeli air force flight instructors, and it teaches an idea you will then see everywhere: regression to the mean. He told the instructors that praise works better than punishment, and a veteran objected. When I praise a cadet for a beautiful maneuver, he said, the next one is usually worse; when I scream at a bad one, the next is usually better. So punishment works. But any single flight is part skill and part luck, and luck does not persist. After an exceptional run the next will drift back toward the cadet's ordinary level no matter what you say, and after a terrible one it will improve on its own. The instructor had spent years being fooled by a statistical inevitability. The same math explains the Sports Illustrated jinx and the sophomore slump: an extreme result is simply followed by a more average one, no curse required.",
+        "This craving to invent causes feeds straight into overconfidence, what Kahneman calls the illusion of validity. As a young officer he watched soldiers solve a group obstacle and felt he could read their leadership with total clarity, then checked his confident predictions against reality and found the correlation near zero. Knowing his judgments were worthless changed nothing about how certain he felt the next day. He found the same thing inside a wealth-management firm: rank the advisors by results and the ordering one year barely predicted the next, meaning their success was mostly luck, yet bonuses and stars were handed out on it, and the executives shrugged the finding off. Real expert intuition does exist, but only where the world has stable patterns and gives quick, honest feedback. Chess and anesthesiology qualify; the stock market and long-range forecasting do not.",
+        "One flavor of overconfidence is so expensive it earns its own name: the planning fallacy, our habit of forecasting closer to the best case than to reality. Writing a textbook, Kahneman's own team guessed about two years. Then he asked an expert on the team how long similar teams had actually taken. The answer: a large share never finished at all, and none that did took less than seven years. The book took eight. Even armed with that grim number, the team plowed ahead, sure they were the exception. The cure is the outside view: stop treating your project as unique, find the reference class of similar efforts, and anchor on how they truly turned out. A companion tool is the premortem, where before committing you imagine the plan has already failed a year from now and each person writes down why, which gives quiet doubts permission to speak. The feeling of confidence, Kahneman insists, is only a feeling, and it is no measure of whether you are right."
+      ]
+    },
+    {
+      "h": "Losses Loom Twice As Large",
+      "p": [
+        "The work that won Kahneman the Nobel is prospect theory, and its first pillar is the most practical finding in the book: loss aversion. Losses hurt about twice as much as equivalent gains feel good. Offered a coin flip where heads loses you a hundred dollars and tails wins you a hundred, almost nobody takes it, even though the bet is perfectly fair. Ask how large the winning side must grow before the bet tempts you and the typical answer is around two hundred dollars. You need the possible gain to roughly double the possible loss before an even bet feels worth it.",
+        "The second pillar is the reference point. We do not judge outcomes by final wealth, the way classical economics assumed, but by changes from where we currently stand. Kahneman sets Anthony, who has one million dollars, beside Betty, who has four. By tomorrow both hold two million. Classical theory says they should feel identical, since they now own the same amount. Of course they do not. Anthony is elated to have doubled his money and Betty is miserable to have lost half of hers. Same endpoint, opposite emotions, entirely because they started from different places.",
+        "Put loss aversion and reference points together and you get the endowment effect. The moment you own something it joins your reference point, and giving it up now registers as a painful loss. In the famous experiment, researchers handed plain coffee mugs to half a room at random, then let people trade. Owners who had held their mug for five minutes demanded about seven dollars to part with it, while buyers would pay only about three. Same mug, same room, and the price to sell was more than double the price to buy. This is why free trials convert so well, why you cannot get what you feel your old car is worth, and why we cling to clutter and to losing investments long past reason."
+      ]
+    },
+    {
+      "h": "Framing And The Two Selves",
+      "p": [
+        "Prospect theory has a startling consequence: the same facts, worded two ways, can flip your choice. Tell surgery patients that ninety of a hundred people are alive after five years and they lean in; tell them ten of a hundred are dead and they recoil, though it is the identical statistic. Even experienced physicians shift their recommendations with the wording. Kahneman and Tversky nailed it with the Asian disease problem. Framed as lives saved, most people take the sure option that rescues two hundred for certain rather than gamble. Framed as lives lost, the same people gamble to avoid a certain four hundred deaths, even though two hundred saved and four hundred dead out of six hundred are the very same outcome. Only the word changed, and it reversed the majority.",
+        "The book closes on its most haunting idea: you contain two selves. The experiencing self lives your life moment to moment and feels the pain right now. The remembering self keeps score afterward, tells the story, and decides whether you will ever go back. The shock is that the remembering self is a biased historian, and it is the one running the show. It judges an experience by two rules. The peak-end rule: we remember roughly how it felt at its most intense point and how it felt at the very end, and discard the middle. And duration neglect: how long the whole thing lasted barely registers. In the cold-hand experiment people chose to repeat a longer immersion in painful water, which held strictly more total suffering, simply because its final seconds were made a touch less cold. They volunteered for more pain because it ended better.",
+        "Kahneman found the same pattern in real colonoscopies, back when they were far more uncomfortable. Patients rated their pain minute by minute and then gave one overall verdict afterward, and that verdict, which decided whether they would return for the screening that could save their life, ignored the total pain they had actually endured. A procedure that ended on a sharp spike was remembered as terrible even if it was short, while a longer one allowed to wind down gently was remembered as tolerable. The unsettling implication is that adding a few extra minutes of milder discomfort at the end causes more real suffering yet leaves behind a kinder memory. The two selves genuinely want different things, and it is not obvious which one we owe our loyalty."
+      ],
+      "pull": "The remembering self is a biased historian, and it is the one who runs your life."
+    }
+  ],
+  "chart": {
+    "title": "A Loss Hurts About Twice As Much",
+    "subtitle": "The emotional weight of the same one hundred dollars, gained or lost",
+    "unit": "",
+    "caption": "Illustrative. Kahneman and Tversky found that losses loom roughly twice as large as equivalent gains. That asymmetry is why most people refuse a fair coin flip to win or lose one hundred dollars, and only start to accept the bet when the possible win climbs near two hundred.",
+    "bars": [
+      {"label": "How good gaining $100 feels", "value": 100, "display": "1x"},
+      {"label": "How bad losing $100 feels", "value": 200, "display": "2x"},
+      {"label": "Win needed to accept a $100 risk", "value": 200, "display": "~$200"}
+    ]
+  },
+  "takeaways": [
+    "On any decision that matters, pause and distrust the answer that arrives instantly. Check the arithmetic, look up the base rate, ask what the story leaves out, and test whether you would choose the same if it were worded the other way.",
+    "When a number gets dropped into a negotiation or onto a price tag, name it as an anchor and deliberately argue why it is wrong before you settle on your own figure.",
+    "Before judging how risky or common something is, ask for the base rate. If a fear is riding on a single vivid news image, treat that vividness as a clue that the event is actually rare.",
+    "When you meet an extreme result, a stellar quarter or a disastrous review, expect the next one to land closer to average, and resist inventing a cause for what regression alone predicts.",
+    "Before committing to any plan, take the outside view: find several similar past projects and anchor your timeline and budget on how they truly turned out, not on your hopeful inside story.",
+    "Run a premortem on big decisions. Imagine it is a year later and the choice has failed badly, then have everyone write down exactly how it happened.",
+    "At every decision point, ignore the money and time already spent. Ask only which path is best from where you stand right now."
+  ]
+}

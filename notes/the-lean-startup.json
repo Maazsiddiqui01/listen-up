@@ -1,0 +1,73 @@
+{
+  "hook": "You can execute a flawless plan, ship a polished product, and work heroic hours, and still build something nobody wants. This book hands you the fastest, cheapest path to the one thing that actually protects you: the truth about your idea, found before the money runs out.",
+  "read_min": 10,
+  "sections": [
+    {
+      "h": "What a Startup Really Is",
+      "p": [
+        "Ask most people what a startup is and they picture a garage, a logo, and some venture capital. Eric Ries throws all of that out. A startup, he says, is a human institution designed to create something new under conditions of extreme uncertainty. Notice what is missing. Nothing about size, industry, or garages. A startup can be two people, and it can equally be a team of forty inside a giant corporation launching a new product line. If you are building something new and genuinely do not know whether people will want it, you are running a startup.",
+        "Ries earned this the hard way at a company called IMVU, where his old worldview died. His team were brilliant engineers who spent about six months building their first product before they let a single customer touch it. When they finally launched, almost nobody used it. Not because it was buggy, but because customers did not want the thing the team had so carefully built.",
+        "He calls this achieving failure, and it is one of the scariest ideas in the book. Achieving failure means competently, on time and on budget, executing a plan that leads absolutely nowhere. Most startups do not die because the team was lazy or stupid. They die because the team did a fantastic job building something nobody needed."
+      ],
+      "pull": "Achieving failure is competently, on time and on budget, executing a plan that leads nowhere."
+    },
+    {
+      "h": "Validated Learning Beats Motion",
+      "p": [
+        "The fundamental unit of progress for a startup, Ries argues, is not a line of code, a feature shipped, or an hour worked. It is validated learning, learning backed by real evidence about what customers actually do, not what they say in a survey. At IMVU the team shipped constantly and felt productive, yet by the only measure that mattered they had learned almost nothing that a customer's behavior confirmed.",
+        "This idea comes straight from Toyota and lean manufacturing, where waste is anything that does not add value for the customer. Ries had a realization. The greatest waste in a startup is not physical, it is building a feature, a product, or a whole company that customers do not want. That waste is invisible because it hides inside activity that looks productive. So stop asking whether the product can be built, since in our era almost anything can, and start asking whether it should be built.",
+        "To generate validated learning on purpose you run the Build-Measure-Learn loop. You have an idea, you build a product to test it, you measure how customers respond, and you learn whether to pivot or persevere, then around again as fast as you can. The crucial twist is that you design the loop in reverse. First decide what you most need to learn, then what you would have to measure to know it, and only then the smallest thing you could build to produce that measurement. Most people start by building the most impressive thing and hope learning falls out, and that is backwards."
+      ]
+    },
+    {
+      "h": "The MVP and Its Disguises",
+      "p": [
+        "This is the tool that made the book famous, and people butcher it constantly. The Minimum Viable Product is not a smaller, cheaper, crummier version of the final product. It is the version that lets you start the Build-Measure-Learn loop with the least possible effort, the fastest way through one full turn of learning. Its only job is to test your riskiest assumptions. It might be held together with tape, and that is fine, because its purpose is not to be your business but to teach you whether the business is worth building at all.",
+        "The genius is that an MVP can take wildly different forms. In a concierge MVP you deliver the service by hand to a tiny handful of customers. The founder of Food on the Table personally met one customer, learned her family's tastes, and hand made her a meal plan and shopping list every week before writing a line of the software that would later automate it. In a Wizard of Oz MVP the customer thinks they are using a finished, automated product, while behind the curtain humans do the work by hand. You fake the backend to test whether anyone wants the output before you build it.",
+        "Two more forms are pure leverage. Dropbox could not easily demo seamless file syncing, so the team made a simple three minute video showing how it would work. That video drove their beta waiting list from a few thousand people to about seventy five thousand overnight, an enormous amount of validated learning gathered before the hardest engineering was ever done. Zappos went even leaner. Nick Swinmurn photographed shoes in local stores, put the pictures on a bare website, and when an order came in he bought the shoes at retail and shipped them himself. No warehouse, no inventory, but proof that real people would really pay to buy shoes online."
+      ],
+      "pull": "The MVP's job is not to be your business. It is to teach you whether the business is worth building at all."
+    },
+    {
+      "h": "Name Your Leap of Faith",
+      "p": [
+        "Every business plan rests on a few beliefs that, if false, sink the whole thing. Ries calls these leap of faith assumptions, and says two matter most. The value hypothesis asks whether your product actually delivers value once people use it, whether they get something real that keeps them coming back. The growth hypothesis asks how new customers will discover and adopt it. A product can delight its few users yet have no way to reach more, and that is a dead end just as surely as the reverse.",
+        "The discipline is to test the riskiest assumption first. Figure out which belief, if wrong, would kill you fastest, and aim your very first MVP straight at it. Do not waste your opening experiment on something you are already confident about. Point it at the scariest unknown, the one you have secretly been avoiding because you fear the answer.",
+        "And you cannot answer these questions from your desk. Ries borrows another Toyota idea, genchi genbutsu, which means go and see for yourself. The truth about your product is not in your head or in a spreadsheet of your assumptions. It is out in the messy real world, in the behavior of actual people. So get out of the building and watch them struggle with your thing. The richest source of learning is the customer you are too scared to go talk to."
+      ]
+    },
+    {
+      "h": "Metrics That Cannot Lie",
+      "p": [
+        "Raw numbers can lie to you, beautifully. Vanity metrics are figures that make you feel wonderful but tell you nothing about whether the business works, total registered users, total downloads, total page views. The tell is that they are gross cumulative totals that only ever climb, because you keep adding new people and the ones who quit stay in the count forever. A chart that always goes up feels like success, and that feeling is a drug.",
+        "The antidote is actionable metrics, which pass three tests. They are actionable, showing clear cause and effect so you know what your change actually did. They are accessible, understandable by everyone who needs to act on them, ideally in terms of real people. And they are auditable, credible enough that you could drill down to the actual customers behind the number. Two techniques keep metrics honest. Cohort analysis groups customers by when they first arrived and tracks each group separately over time. Split testing offers two versions at once and measures which one produces better behavior.",
+        "Ries ties this together as innovation accounting, a three step discipline. First establish the baseline with an MVP, the real conversion, retention, and referral rates you actually have today. Then tune the engine, running experiment after experiment to move those numbers toward viability. Then face the moment of truth, pivot or persevere, judged honestly on whether the tuning is genuinely moving you closer to a sustainable business or not."
+      ],
+      "pull": "A chart that only ever climbs feels like success, and that feeling is a drug."
+    },
+    {
+      "h": "The Pivot and Growth Engines",
+      "p": [
+        "A pivot is a structured course correction to test a new fundamental hypothesis, and the phrase that captures it is a change in strategy without a change in vision. You keep one foot planted on everything you have already learned and step in a new direction with the other. It is not failure. Ries argues the number one reason startups die is running out of runway before they have had enough pivots to find what works, so the real question is whether you will pivot soon enough. He lays out a whole menu of types, zoom in and zoom out, customer segment and customer need, platform, channel, and technology, to show that when things stall you have far more options than just quit or push harder.",
+        "Sustainable growth, he says, comes from exactly one of three engines, and you must know which is yours. The sticky engine runs on retention, where the number that matters most is your churn rate, and you grow by refusing to let customers leak away. The viral engine grows as a natural side effect of use, where each customer brings in others just by using the product, and a viral coefficient above one produces explosive, compounding growth.",
+        "The paid engine grows by spending to acquire customers, and it works only if the math works, if the lifetime value of a customer comfortably exceeds the cost to acquire them. Ries is emphatic that you focus on one engine at a time. Trying to optimize all three at once creates chaos and muddy metrics. Pick the engine that fits your business, find the handful of numbers that drive it, and tune them relentlessly. And when that engine finally sputters, that may be the moment for a pivot."
+      ]
+    },
+    {
+      "h": "Build in Small Batches",
+      "p": [
+        "The last movement of the book is about how you build day to day, and it starts with the counterintuitive power of small batches. Picture stuffing a big stack of envelopes. Intuition says fold every letter, then stuff every envelope, then seal them all, then stamp them all, one operation across the whole pile. Yet when you race that against finishing one envelope completely before starting the next, the one at a time approach usually wins, because the large batch hides problems until the end. If the letters do not fit the envelopes, small batches tell you on envelope one instead of after you have folded every last one.",
+        "In product terms, small batches mean faster feedback, defects found sooner, and far less risk of building a huge pile of the wrong thing before anyone notices. This is why IMVU embraced continuous deployment, shipping tiny changes many times a day. It sounds reckless, but a bug in a giant batch is a needle in a haystack, while a bug in a tiny batch sits right in front of you. Ries pairs this with Toyota's andon cord, where any worker can halt the whole line the instant they see a defect, because it is always cheaper to stop and fix a problem now than to ship it into hundreds of finished cars.",
+        "His most portable tool is the Five Whys. When something breaks, ask why it happened, then ask why of that answer, about five times, until you pass the technical symptom and reach the human or process cause underneath. A failed server traces back, why by why, to a manager who does not train new engineers. Fix only the server and the same problem returns in new disguises. Ries adds one rule that keeps this from curdling into the Five Blames, fix the process and never punish the person, or people will simply stop surfacing problems at all."
+      ]
+    }
+  ],
+  "takeaways": [
+    "Write down your leap of faith assumptions in plain words: your value hypothesis, that customers will get real value, and your growth hypothesis, how you will actually reach more of them.",
+    "Circle the single riskiest assumption, the one that kills everything if it is false and that you have been avoiding testing. That is your first target.",
+    "Design the smallest possible experiment to test that one assumption. Ask what your Zappos move or your Dropbox video is, the least you can build to get one real signal from one real customer.",
+    "Get out of the building this week and have real conversations with five potential customers. Watch and listen, and resist the urge to pitch.",
+    "Pick one honest metric that is actionable, accessible, and auditable, and track it by cohort instead of as a cumulative total that only ever climbs.",
+    "The next time something breaks, ask why five times, calmly and with no blame, and fix the root cause you find instead of patching the surface."
+  ]
+}
