@@ -26,10 +26,19 @@ const gcolor=g=>(DATA.genres.find(x=>x.name===g)||{}).color||'#0FA0A0';
 const saveProg=()=>localStorage.setItem('lu-prog',JSON.stringify(prog));
 
 // ---- theme ----
-function setTheme(t){document.documentElement.dataset.theme=t;localStorage.setItem('lu-theme',t);$('#theme').textContent=t==='dark'?'☀️':'🌙';
+// Default: follow the phone's own setting (dark only when the OS is dark, light
+// otherwise). The manual toggle sets an explicit choice that then sticks; with no
+// explicit choice we keep tracking the OS live.
+const sysDark=()=>matchMedia('(prefers-color-scheme: dark)').matches;
+function paintTheme(t){document.documentElement.dataset.theme=t;$('#theme').textContent=t==='dark'?'☀️':'🌙';
+  $('#theme').setAttribute('aria-label', t==='dark'?'Switch to light theme':'Switch to dark theme');
   document.querySelector('meta[name=theme-color]').content=t==='dark'?'#0C1719':'#0FA0A0';}
-setTheme(localStorage.getItem('lu-theme')|| (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+function setTheme(t){localStorage.setItem('lu-theme',t); paintTheme(t);}   // explicit user choice
+paintTheme(localStorage.getItem('lu-theme') || (sysDark()?'dark':'light'));
 $('#theme').onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');
+try{ matchMedia('(prefers-color-scheme: dark)').addEventListener('change',e=>{
+  if(!localStorage.getItem('lu-theme')) paintTheme(e.matches?'dark':'light');   // only when the user hasn't overridden
+}); }catch(e){}
 
 async function load(){
   try{ DATA=await (await fetch('content.json',{cache:'no-cache'})).json(); }
@@ -47,7 +56,7 @@ async function load(){
     $('#view').setAttribute('aria-pressed',listView); }
   $('#view').onclick=()=>{listView=!listView;localStorage.setItem('lu-view',listView?'list':'grid');setViewBtn();render();};
   setViewBtn();
-  $('#speed').textContent=SPEEDS[si]+'×';
+  $('#speedlbl').textContent=SPEEDS[si]+'×';
   applyCcBtn();
   applyOffline();
   if(offline) showDownloads(); else render();   // offline? land straight on Downloads, Netflix-style
@@ -126,9 +135,10 @@ function card(b){
     : off ? `${b.title} by ${b.author}, not downloaded, unavailable offline`
     : `Play ${b.title} by ${b.author}, ${b.duration}`;
   const readbtn = (b.status==='ready'&&b.notes)?`<button class="readbtn" data-read="${b.slug}" type="button" aria-label="Read the summary of ${esc(b.title)}">📖</button>`:'';
+  const donebtn = (b.status==='ready')?`<button class="donebtn${isDone(b)?' on':''}" data-done="${b.slug}" type="button" aria-label="${isDone(b)?'Mark as not finished':'Mark as finished'}">${isDone(b)?'↺':'✓'}</button>`:'';
   return `<article class="bk ${b.status}${off?' unavail':''}" data-slug="${b.slug}" role="button" tabindex="0" aria-label="${esc(label)}">
     <div class="cw"><img src="${cover}" alt="" decoding="async" onerror="this.style.opacity=0">${badge}
-    ${playable(b)?'<div class="play" aria-hidden="true">▶</div>':''}${readbtn}${pbar}</div>
+    ${playable(b)?'<div class="play" aria-hidden="true">▶</div>':''}${readbtn}${donebtn}${pbar}</div>
     <div class="bkmeta"><h3>${esc(b.title)}</h3><div class="au">${esc(b.author)}</div>
     <div class="blurb">${esc(b.blurb||'')}</div>
     <div class="mrow"><span>${esc(b.genre)}</span>${b.duration?`<span>${b.duration}</span>`:''}${b.notes?'<span class="readpill">📖 Read</span>':''}${dl[b.slug]?'<span class="dlpill">⤓ Saved</span>':''}</div></div></article>`;
@@ -157,6 +167,11 @@ function render(){
 function bind(){
   document.querySelectorAll('.bk .readbtn').forEach(rb=>{ rb.onclick=e=>{ e.stopPropagation();
     const b=DATA.books.find(x=>x.slug===rb.dataset.read); if(b) openReader(b); }; });
+  document.querySelectorAll('.bk .donebtn').forEach(db=>{ db.onclick=e=>{ e.stopPropagation();
+    const b=DATA.books.find(x=>x.slug===db.dataset.done); if(!b) return;
+    const now=!isDone(b); setDone(b,now);
+    if(cur&&cur.slug===b.slug) applyMarkBtn();
+    toast(now?'“'+b.title+'” moved to Finished ✓':'Moved back to Discover'); render(); }; });
   document.querySelectorAll('.bk').forEach(el=>{
     const go=()=>{const b=DATA.books.find(x=>x.slug===el.dataset.slug);
       if(b.status!=='ready'){ toast('“'+b.title+'” drops this week 🎧'); return; }
@@ -220,43 +235,75 @@ function openBook(b){
   audio.addEventListener('loadedmetadata',start);
   audio.play().catch(()=>{});
   setMediaSession(b);
-  loadCaptions(b);
   $('#cctoggle').hidden=!b.caps;          // subtitles only when a track exists
   $('#read').hidden=!b.notes;             // Read only when notes exist
+  loadCaptions(b);
+  applyMarkBtn();
 }
 
 // ---- live subtitles ----
 let caps=null, capIdx=-1, capOn=localStorage.getItem('lu-cc')==='1';
 function applyCcBtn(){ const t=$('#cctoggle'); t.classList.toggle('done',capOn); t.setAttribute('aria-pressed',capOn);
-  t.textContent=capOn?'💬 Subtitles on':'💬 Subtitles'; $('#cc').hidden=!capOn; }
+  const pl=t.querySelector('.pl'); if(pl) pl.textContent=capOn?'Subtitles on':'Subtitles';
+  $('#cc').hidden=!capOn; setCcOn(capOn); }
 async function loadCaptions(b){
-  caps=null; capIdx=-1; $('#ccnow').textContent=''; $('#cctoggle').hidden=false;
-  if(!capOn) return;
+  caps=null; capIdx=-1; ccLast=''; $('#ccnow').textContent=''; setCcOn(capOn);
+  if(!capOn||!b.caps) return;
   fetchCaptions(b.slug);
 }
 async function fetchCaptions(slug){
   try{ const r=await fetch('captions/'+slug+'.json',{cache:'force-cache'});
-    if(!r.ok){ caps=[]; $('#cctoggle').hidden=true; return; }   // no track for this book
-    const j=await r.json(); if(cur&&cur.slug===slug){ caps=j.cues||[]; capIdx=-1; syncCaption(true); }
+    if(!r.ok){ caps=[]; $('#cctoggle').hidden=true; setCcOn(false); return; }   // no track for this book
+    const j=await r.json(); if(cur&&cur.slug===slug){ caps=j.cues||[]; capIdx=-1; ccLast='\x00'; syncCaption(true); }
   }catch(e){ caps=[]; }
 }
+// Split one sentence cue into <=2-line display chunks with proportional timing,
+// so a long sentence rolls two lines at a time instead of overflowing the strip.
+const CC_MAX=58;   // roughly two lines at the mobile caption size
+function ccSegments(c){
+  if(c._seg) return c._seg;
+  const words=c.x.split(/\s+/); const segs=[]; let cur='';
+  for(const w of words){
+    if(cur && (cur.length+1+w.length)>CC_MAX){ segs.push(cur); cur=w; }
+    else cur = cur ? cur+' '+w : w;
+  }
+  if(cur) segs.push(cur);
+  // time-slice the sentence by cumulative character length
+  const total=segs.reduce((n,s)=>n+s.length,0)||1; let acc=0;
+  c._seg=segs.map(s=>{ const start=c.t + c.d*(acc/total); acc+=s.length;
+    return {t:start, x:s}; });
+  return c._seg;
+}
+let ccLast='';
 function syncCaption(force){
   if(!capOn||!caps||!caps.length) return;
   const t=audio.currentTime;
-  // fast path: usually just advance to the next cue
   let i=capIdx;
   if(i<0||force||t<caps[i].t||(caps[i+1]&&t>=caps[i+1].t)){
-    // binary search for the cue whose start <= t
     let lo=0,hi=caps.length-1,best=0;
     while(lo<=hi){ const m=(lo+hi)>>1; if(caps[m].t<=t){best=m;lo=m+1;} else hi=m-1; }
     i=best;
   }
-  if(i!==capIdx){ capIdx=i; const c=caps[i];
-    const shown=(t>=c.t && t<=c.t+c.d+0.4)?c.x:(t<caps[0].t?'':caps[i].x);
-    $('#ccnow').textContent=shown; }
+  capIdx=i;
+  const c=caps[i];
+  let text='';
+  if(t<caps[0].t-0.3){ text=''; }
+  else {
+    const segs=ccSegments(c);
+    let s=segs[0];
+    for(const seg of segs){ if(seg.t<=t+0.05) s=seg; else break; }
+    text=s.x;
+  }
+  if(text!==ccLast){ ccLast=text; $('#ccnow').textContent=text; }
 }
-$('#cctoggle').onclick=()=>{ capOn=!capOn; localStorage.setItem('lu-cc',capOn?'1':'0'); applyCcBtn();
-  if(capOn){ if(cur){ if(caps&&caps.length){ syncCaption(true);} else fetchCaptions(cur.slug); } }
+function setCcOn(on){
+  const active = on && !$('#cctoggle').hidden;
+  $('#player').classList.toggle('cc-on', active);
+  // the waveform is hidden while captions show, so stop drawing it
+  if(active) stopViz(); else if(sheetOpen && !audio.paused) startViz();
+}
+$('#cctoggle').onclick=()=>{ capOn=!capOn; localStorage.setItem('lu-cc',capOn?'1':'0'); applyCcBtn(); setCcOn(capOn);
+  if(capOn){ if(cur){ if(caps&&caps.length){ ccLast='\x00'; syncCaption(true);} else fetchCaptions(cur.slug); } }
 };
 
 // ---- Read view (beautiful long-form notes) ----
@@ -331,6 +378,22 @@ function closeReader(){
 }
 $('#read').onclick=()=>{ if(cur){ audio.pause(); openReader(cur); } };
 
+// ---- mark as done / not done ----
+function applyMarkBtn(){ const b=$('#markdone'); if(!cur) return;
+  const done=isDone(cur); b.classList.toggle('done',done);
+  b.textContent=done?'✓ Finished · tap to undo':'Mark as finished'; }
+function pushSlug(slug){ const p=prog[slug]; if(!p) return;
+  fetch(SB.url+'/rest/v1/listenup_progress?on_conflict=user_key,slug',{method:'POST',
+    headers:{apikey:SB.key,Authorization:'Bearer '+SB.key,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates'},
+    body:JSON.stringify({user_key:SB.user,slug,t:p.t,dur:p.dur||0,done:!!p.done,updated_at:new Date().toISOString()})}).catch(()=>{}); }
+function setDone(b,done){
+  const p=prog[b.slug]||{};
+  prog[b.slug]={t:0,dur:p.dur||0,done:done,u:Date.now()};
+  saveProg(); pushSlug(b.slug);
+}
+$('#markdone').onclick=()=>{ if(!cur) return; const now=!isDone(cur); setDone(cur,now); applyMarkBtn();
+  toast(now?'Moved to Finished ✓':'Moved back to Discover'); render(); };
+
 // lock-screen / headset / car-stereo controls: essential for gym and driving
 function setMediaSession(b){
   if(!('mediaSession' in navigator)) return;
@@ -350,7 +413,7 @@ const skip=d=>{ if(audio.duration||d<0) audio.currentTime=Math.min(audio.duratio
 function setPlay(p){ $('#play').textContent=$('#mplay').textContent=p?'❚❚':'▶';
   if('mediaSession' in navigator) navigator.mediaSession.playbackState=p?'playing':'paused'; }
 $('#play').onclick=$('#mplay').onclick=()=>{ audio.paused?audio.play().catch(()=>{}):audio.pause(); };
-audio.onplay=()=>{setPlay(true); if(sheetOpen)startViz();};
+audio.onplay=()=>{setPlay(true); if(sheetOpen && !$('#player').classList.contains('cc-on')) startViz();};
 audio.onpause=()=>{setPlay(false);saveNow();pushRemote(true);stopViz();};
 let seeking=false;
 audio.ontimeupdate=()=>{ if(!audio.duration)return;
@@ -379,7 +442,7 @@ $('#seek').onchange=seekEnd;
 $('#back').onclick=()=>skip(-15);
 $('#fwd').onclick=()=>skip(15);
 $('#speed').onclick=()=>{ si=(si+1)%SPEEDS.length; audio.playbackRate=SPEEDS[si];
-  $('#speed').textContent=SPEEDS[si]+'×'; localStorage.setItem('lu-speed',si); };
+  $('#speedlbl').textContent=SPEEDS[si]+'×'; localStorage.setItem('lu-speed',si); };
 $('#close').onclick=closePlayer;
 $('#player').onclick=e=>{ if(e.target===$('#player')) closePlayer(); };   // tap the dim backdrop
 document.addEventListener('keydown',e=>{
@@ -429,11 +492,13 @@ const saveDl=()=>localStorage.setItem('lu-dl',JSON.stringify(dl));
 const AUDIO_CACHE='lu-audio';
 let confirmRemove=false, confirmTid;
 
+function dlSet(icon,label){ const b=$('#dl'); const pi=b.querySelector('.pi'),pl=b.querySelector('.pl');
+  if(pi)pi.textContent=icon; if(pl)pl.textContent=label; }
 function updDl(){ const b=$('#dl'); if(!cur) return;
   b.disabled=false;
-  if(confirmRemove){ b.textContent='Tap again to remove'; b.classList.add('done'); return; }
-  if(dl[cur.slug]){ b.textContent='✓ Saved offline'; b.classList.add('done'); }
-  else{ b.textContent='⤓ Download'; b.classList.remove('done'); } }
+  if(confirmRemove){ dlSet('🗑','Tap to remove'); b.classList.add('done'); return; }
+  if(dl[cur.slug]){ dlSet('✓','Saved'); b.classList.add('done'); }
+  else{ dlSet('⤓','Download'); b.classList.remove('done'); } }
 
 // Ask the browser not to evict our audio. Without this, mobile browsers silently
 // purge the Cache API under storage pressure and downloads vanish.
@@ -452,7 +517,7 @@ async function removeDownload(slug,url){
 
 async function downloadCurrent(){
   const b=$('#dl'), slug=cur.slug, url=cur.audio, title=cur.title;
-  b.disabled=true; b.textContent='Saving…';
+  b.disabled=true; dlSet('⏳','Saving');
   await askPersist();
   try{
     const res=await fetch(url,{cache:'no-store'});
@@ -463,7 +528,7 @@ async function downloadCurrent(){
       const reader=res.body.getReader(); const chunks=[]; let got=0;
       for(;;){ const {done,value}=await reader.read(); if(done) break;
         chunks.push(value); got+=value.length;
-        if(total) b.textContent='Saving '+Math.min(99,Math.round(got/total*100))+'%'; }
+        if(total) dlSet('⏳',Math.min(99,Math.round(got/total*100))+'%'); }
       blob=new Blob(chunks,{type:'audio/mpeg'});
     } else { blob=await res.blob(); }
     if(total&&Math.abs(blob.size-total)>1024) throw new Error('incomplete download');

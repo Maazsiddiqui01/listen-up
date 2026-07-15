@@ -59,9 +59,11 @@ button,.chip,.tab,.grpbtn{touch-action:manipulation;-webkit-tap-highlight-color:
 .bk .done{background:var(--acc)}
 .bk .play{position:absolute;right:10px;bottom:10px;width:44px;height:44px;border-radius:50%;background:var(--acc);color:#fff;display:grid;place-items:center;font-size:16px;box-shadow:0 6px 14px rgba(0,0,0,.35);opacity:0;transform:translateY(6px);transition:.16s}
 .bk .readbtn{position:absolute;left:8px;top:8px;width:38px;height:38px;border-radius:50%;border:0;background:rgba(0,0,0,.45);color:#fff;font-size:16px;cursor:pointer;backdrop-filter:blur(4px);display:grid;place-items:center;opacity:0;transition:.16s}
-.bk:hover .readbtn,.bk:focus-within .readbtn{opacity:1}
-@media(hover:none){.bk .readbtn{opacity:1}}
-@media(pointer:coarse){.bk .readbtn{width:40px;height:40px}}
+.bk .donebtn{position:absolute;left:8px;bottom:8px;width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(255,255,255,.75);background:rgba(0,0,0,.4);color:#fff;font-size:16px;cursor:pointer;backdrop-filter:blur(4px);display:grid;place-items:center;opacity:0;transition:.16s}
+.bk .donebtn.on{background:var(--acc);border-color:transparent;opacity:1}
+.bk:hover .readbtn,.bk:focus-within .readbtn,.bk:hover .donebtn,.bk:focus-within .donebtn{opacity:1}
+@media(hover:none){.bk .readbtn,.bk .donebtn{opacity:1}}
+@media(pointer:coarse){.bk .readbtn,.bk .donebtn{width:40px;height:40px}}
 .bk .mrow .readpill{color:var(--acc);background:color-mix(in srgb,var(--acc) 14%,transparent)}
 .bk:hover .play,.bk:focus-visible .play{opacity:1;transform:none}
 /* touch devices have no hover, so the play affordance must always be visible */
@@ -153,17 +155,33 @@ button,.chip,.tab,.grpbtn{touch-action:manipulation;-webkit-tap-highlight-color:
 .controls{display:flex;align-items:center;gap:clamp(1.1rem,7vw,2rem);margin:1.1rem 0 .4rem}
 .ctl{background:none;border:0;color:var(--ink);font:600 14px var(--sans);cursor:pointer;min-width:56px;min-height:48px;border-radius:12px}
 .playbig{width:72px;height:72px;flex:0 0 auto;border-radius:50%;background:var(--acc);color:#fff;border:0;font-size:25px;cursor:pointer;box-shadow:0 10px 24px rgba(15,160,160,.4)}
-.prow{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:.3rem}
-.pill{background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:0 18px;min-height:44px;font:600 14px var(--sans);cursor:pointer;white-space:nowrap}
+/* action buttons: a balanced 2x2 grid on phones, one row on wider screens */
+.prow{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:min(94%,440px);margin-top:.7rem}
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--bg);color:var(--ink);
+ border:1px solid var(--line);border-radius:14px;padding:0 14px;min-height:48px;font:600 14px var(--sans);cursor:pointer;
+ white-space:nowrap;overflow:hidden}
+.pill .pi{font-size:16px;line-height:1;flex:0 0 auto}
+.pill .pl{overflow:hidden;text-overflow:ellipsis}
 .pill.done{background:var(--acc);color:#fff;border-color:transparent}
+#speed{font-variant-numeric:tabular-nums}
+@media(min-width:560px){.prow{grid-template-columns:repeat(4,1fr);border-radius:999px}.pill{border-radius:999px}}
+.markdone{width:min(94%,440px);margin-top:10px;min-height:46px;border:1px solid var(--line);
+ background:transparent;color:var(--sub);border-radius:14px;font:600 13.5px var(--sans);cursor:pointer}
+.markdone:hover{color:var(--ink);border-color:var(--acc)}
+.markdone.done{color:var(--acc);border-color:var(--acc);background:color-mix(in srgb,var(--acc) 10%,transparent)}
+@media(min-width:560px){.markdone{border-radius:999px}}
 .pblurb{color:var(--sub);font-size:13.5px;line-height:1.6;margin-top:1.2rem;text-align:center;max-width:38rem}
-/* live subtitles: one calm sentence at a time under the artwork */
-.cc{min-height:3.4em;display:flex;align-items:center;justify-content:center;width:min(94%,440px);
- margin:.3rem 0 .1rem;text-align:center}
-.ccnow{font:600 17px/1.4 var(--serif);color:var(--ink);max-width:100%;
- transition:opacity .18s ease;text-wrap:balance}
-.cc.pending .ccnow{opacity:.35}
-@media(max-height:620px){.cc{min-height:2.6em}.ccnow{font-size:15px}}
+/* live subtitles: a fixed 2-line caption strip under the artwork, never overflowing.
+   Long sentences are chunked in JS so at most 2 lines show at a time. */
+.cc{display:flex;flex:0 0 auto;align-items:center;justify-content:center;width:min(94%,440px);
+ height:3.1em;margin:.4rem 0 .2rem;text-align:center;overflow:hidden}
+.ccnow{font:600 clamp(15px,4.4vw,18px)/1.42 var(--serif);color:var(--ink);max-width:100%;
+ display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+ transition:opacity .16s ease;text-wrap:balance}
+/* when subtitles are on, the waveform hides to give the captions room and calm the view */
+.player.cc-on .viz{display:none}
+.player.cc-on .cc{height:3.4em}
+@media(max-height:640px){.cc{height:2.7em;margin:.2rem 0}.player.cc-on .cc{height:3em}}
 /* short / landscape phones: drop the decorative bits so Play never falls below the fold */
 @media(max-height:620px){
  .psheet{max-height:98dvh;padding-top:.35rem;padding-bottom:calc(1rem + var(--safe-b))}

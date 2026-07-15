@@ -63,10 +63,11 @@ document.documentElement.dataset.theme=t;var m=document.querySelector('meta[name
     <div class="times"><span id="cur">0:00</span><span id="dur">0:00</span></div>
     <div class="controls"><button id="back" class="ctl" type="button" aria-label="Back 15 seconds">↺&nbsp;15</button>
       <button id="play" class="playbig" type="button" aria-label="Play or pause">▶</button><button id="fwd" class="ctl" type="button" aria-label="Forward 15 seconds">15&nbsp;↻</button></div>
-    <div class="prow"><button id="speed" class="pill" type="button" aria-label="Playback speed">1×</button>
-      <button id="cctoggle" class="pill" type="button" aria-pressed="false" aria-label="Toggle subtitles">💬 Subtitles</button>
-      <button id="read" class="pill" type="button">📖 Read</button>
-      <button id="dl" class="pill" type="button">⤓ Download</button></div>
+    <div class="prow"><button id="speed" class="pill" type="button" aria-label="Playback speed"><span class="pi" aria-hidden="true">⏩</span><span class="pl" id="speedlbl">1×</span></button>
+      <button id="cctoggle" class="pill" type="button" aria-pressed="false" aria-label="Toggle subtitles"><span class="pi" aria-hidden="true">💬</span><span class="pl">Subtitles</span></button>
+      <button id="read" class="pill" type="button"><span class="pi" aria-hidden="true">📖</span><span class="pl">Read</span></button>
+      <button id="dl" class="pill" type="button"><span class="pi" aria-hidden="true">⤓</span><span class="pl" id="dllbl">Download</span></button></div>
+    <button id="markdone" class="markdone" type="button">Mark as finished</button>
     <p id="pblurb" class="pblurb"></p>
   </div>
 </section>

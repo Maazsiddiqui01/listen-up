@@ -1,4 +1,4 @@
-const C='listenup-v11';
+const C='listenup-v12';
 const AUDIO='lu-audio';
 const SHELL=['./','index.html','app.js','styles.css','content.json','manifest.webmanifest','icons/icon-192.png'];
 
