@@ -1,0 +1,74 @@
+{
+  "hook": "A nineteen year old in an Omaha bookshop picked this up in 1950 and said it was like seeing the light. He was Warren Buffett, and what he took from it was not a single stock tip.",
+  "read_min": 9,
+  "sections": [
+    {
+      "h": "The Man Who Paid For This",
+      "p": [
+        "Benjamin Graham's father died when he was nine and the family fell into poverty. His mother opened a margin account trying to recover, and the panic of 1907 wiped her out. He won a scholarship to Columbia, was offered teaching posts in three separate departments, and turned them all down for a job on Wall Street at twelve dollars a week because the family needed the money.",
+        "In the mid 1920s he read regulatory filings nobody else bothered with and found that Northern Pipe Line, trading at sixty five dollars a share, was sitting on railroad bonds worth about ninety five. Management showed him the door. He bought stock, gathered proxies, won a board seat and forced the distribution. Shareholders received seventy dollars in cash and still owned the pipeline.",
+        "Then 1929 arrived and destroyed him. His fund lost roughly seventy percent through 1932 and it took until 1935 to make his investors whole. Every insistent piece of caution in this book was bought with real money."
+      ]
+    },
+    {
+      "h": "Investment Versus Speculation",
+      "p": [
+        "Graham's definition is precise and worth memorising. An investment operation is one which, upon thorough analysis, promises safety of principal and an adequate return. Operations not meeting these requirements are speculative. Note the word adequate. Not spectacular. Not market-beating.",
+        "His warning, repeated for five hundred pages, is that most people who believe they are investing are speculating, and do not notice because speculation dressed in the vocabulary of investing feels responsible. Never buy something merely because it has risen, or sell merely because it has fallen.",
+        "He then splits investors in two, and almost everyone misreads the split. Defensive and enterprising are not about courage, they are about effort. The enterprising investor is not taking more risk, they are doing more work, and any extra return is wages for labour. The worst place to stand is in between: doing enough to incur the costs of activity and not enough to earn anything from it."
+      ],
+      "pull": "Most of the time you would do better to be thoroughly passive than half active."
+    },
+    {
+      "h": "Mr. Market",
+      "p": [
+        "Imagine you own a share of a small private business, and one of your partners is a man named Mr. Market. Every single day he turns up and tells you what your interest is worth, and offers either to buy you out at that price or to sell you more on the same terms. Often his number is sensible. Just as often it is a little short of silly, because he is euphoric or despondent and cannot tell the difference between his mood and the value of the business.",
+        "Your position is enviable. You may ignore him entirely and he will not be offended. He will be back tomorrow with a new price. You may take advantage of him. What ruins people is letting his mood become their own: selling because his low quote feels like a verdict, buying because his high one feels like proof.",
+        "The market is there to serve you, not to instruct you. Prices are quotations, not judgements. Buffett has said that if you understand this chapter and chapter twenty, and you have the temperament, you cannot get a bad result."
+      ],
+      "pull": "The investor's chief problem, and even his worst enemy, is likely to be himself."
+    },
+    {
+      "h": "Margin Of Safety",
+      "p": [
+        "Asked to distill sound investment into three words, Graham said: margin of safety. You do not buy at what you calculate something is worth. You buy substantially below it, and the gap is your protection.",
+        "The analogy is engineering. You build a bridge to carry thirty thousand pounds and then drive ten thousand pound trucks over it, not because you expect a thirty thousand pound truck but because your calculations might be wrong, the steel might have a flaw, and the cost of being slightly wrong about a bridge is catastrophic.",
+        "The purpose is not to predict better. It is the opposite. The function of the margin of safety, Graham says, is to render unnecessary an accurate estimate of the future. You will never have one. Build positions that do not require it."
+      ],
+      "pull": "You are neither right nor wrong because the crowd disagrees with you. You are right because your data and reasoning are right."
+    },
+    {
+      "h": "Be Businesslike",
+      "p": [
+        "Buffett calls these the nine most important words ever written about investing: investment is most intelligent when it is most businesslike. You are buying a fractional ownership of an enterprise with revenues, debts and customers, not a symbol on a screen. Nobody buys a laundromat because the price of laundromats has been rising. They look at the accounts.",
+        "From that Graham derives four rules. Know what you are doing. Do not let anyone else run your business unless you can supervise them competently and have strong reason to trust them. Do not act unless a reliable calculation shows a fair chance of profit, and avoid ventures with little to gain and much to lose. And have the courage of your knowledge, acting on sound reasoning even when others hesitate.",
+        "For the defensive investor he adds a policy so simple it sounds like a joke and has held up for seventy five years: never less than twenty five percent nor more than seventy five percent in stocks, the rest in bonds, and rebalance back to target. That mechanism forces you to sell into strength and buy into weakness without requiring a single opinion about the future."
+      ]
+    },
+    {
+      "h": "What He Warned About",
+      "p": [
+        "On new issues, Graham is merciless, and his objection is structural rather than cynical. The company chooses when to sell shares, and it will choose the moment most favourable to the seller, which is by definition the moment least favourable to you. They arrive in floods during bull markets and vanish in bear markets, which tells you everything.",
+        "On earnings, he devotes a chapter to how reported profits get dressed up, and it reads as though it were written last year. His instruction is to judge any year against a seven to ten year average, because a single year tells you little about a business and quite a lot about the accountants.",
+        "He also walks through a century of market history, not to find a tradeable pattern but as a vaccination. Every generation discovers a reason why the old rules of valuation no longer apply, and discovers about three years later that they do. When he prepared the 1973 revision, the fashion was the Nifty Fifty, the one-decision growth stocks where price supposedly did not matter. The market halved over the next two years and several of them fell ninety percent."
+      ]
+    },
+    {
+      "h": "The Honest Ending",
+      "p": [
+        "There is an irony Graham wrote about himself. In 1948 his firm bought half of a small insurer called GEICO for about seven hundred thousand dollars, breaking his own rules on diversification and cheapness. That single holding ended up worth more than everything else Graham-Newman did across decades of careful bargain hunting. He drew the moral himself: there is more than one road, and one brilliant decision backed by preparation can outweigh a lifetime of journeyman work.",
+        "And in 1976, the last year of his life, Graham said publicly that he no longer advocated elaborate security analysis to find superior values. Too many capable people were now doing it. He favoured a simplified, rules-based approach applied broadly, which today looks a great deal like a low cost index fund plus a rebalancing policy. A man in his eighties applying the margin of safety principle to his own opinions.",
+        "Which tells you what the book is actually for. As a stock-picking manual, parts are dated and he said so first. As a book about temperament, almost none of it has aged. The intelligent investor of the title, he tells us, is a matter of character much more than of brainpower."
+      ]
+    }
+  ],
+  "takeaways": [
+    "Decide honestly whether you are the defensive or the enterprising investor, judged only by how many hours a month you will genuinely spend reading financial statements.",
+    "Write your stock and bond allocation down now, with an upper and lower bound and a rebalancing rule, while nothing is on fire.",
+    "Before buying anything, write a few sentences on what the business is worth and why. If you cannot write the paragraph, buy the index instead.",
+    "Insist on a real gap between value and price, wide enough that you could be substantially wrong about the business and still not lose money.",
+    "When a holding falls thirty percent, ask only whether the underlying business changed. If it did not, you have received an offer, not a verdict.",
+    "Skip new issues in hot markets on principle, because the seller chose the timing and the seller knows more than you do.",
+    "Judge earnings against a seven to ten year average, never a single year."
+  ]
+}

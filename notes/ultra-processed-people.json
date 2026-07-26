@@ -1,0 +1,85 @@
+{
+  "hook": "A doctor who knows exactly what he is eating stands in his kitchen at eleven at night, finishing a ready meal he does not want and cannot stop eating. He had been on the diet for four weeks. It was a completely ordinary diet.",
+  "read_min": 10,
+  "sections": [
+    {
+      "h": "Four Weeks, Six Kilograms",
+      "p": [
+        "Chris van Tulleken is an infectious diseases doctor at University College London Hospital with a doctorate in molecular virology. For a BBC documentary, monitored by a research team, he ate a diet of eighty percent ultra-processed food for a month. He did not pick eighty percent to be shocking. That is roughly what one in five people in Britain already eats.",
+        "He gained about six kilograms in four weeks, a rate that would have doubled his body weight in a year. His appetite hormones stopped signalling properly, so he was hungry again shortly after eating. He slept badly, became constipated and anxious, and felt about a decade older.",
+        "The finding that unsettled him most came from the brain scans. New functional connections had appeared, strengthening the links between the regions that drive automatic habitual behaviour and those that handle reward. That is the pattern described in the addiction literature, and it had formed in a month. The people around him noticed the change before he did, including his small daughter's sudden fascination with the packets arriving in the house."
+      ],
+      "pull": "Within ten days it stopped feeling like an experiment. Fruit began to seem underwhelming."
+    },
+    {
+      "h": "The Brazilian Paradox",
+      "p": [
+        "The category itself was discovered by accident. In the early 2000s Carlos Monteiro, a professor of nutrition in São Paulo, was working through decades of Brazilian household purchasing data and found something that made no sense. Families were buying less sugar, less salt and less cooking oil year after year, and obesity was rising fast.",
+        "The resolution is obvious once stated and was invisible before. Families were buying less sugar because they were doing less cooking. The sugar had not left their diets, it had moved inside the packet, arriving pre-installed alongside a great many other things. The relevant variable was not the nutrient. It was who did the processing and how far it went.",
+        "That produced the NOVA classification, which sorts food by processing rather than nutrients. Group one is unprocessed food. Group two is cooking ingredients like oil, salt and sugar. Group three is processed food, group one plus group two, so bread, cheese, tinned fish. Group four is ultra-processed: industrial formulations built from substances extracted from foods or synthesised in labs, with additives whose job is to make a cheap degraded substrate resemble food."
+      ]
+    },
+    {
+      "h": "The Test In The Aisle",
+      "p": [
+        "Van Tulleken's working shortcut is the most quoted line in the book. If it is wrapped in plastic and contains at least one ingredient you would not normally find in a domestic kitchen, it is ultra-processed food. Not a perfect rule, and he says so, but it works in four seconds while standing in a supermarket.",
+        "The category is far broader than crisps and fizzy drinks. It includes most supermarket sliced bread, most breakfast cereal including the ones with a field on the box, most flavoured yoghurt, most plant milks, most protein bars, most ready meals including the healthy ranges, and most sauces. Diet and health products are often worse rather than better, because removing fat or sugar creates a hole that has to be filled with additives.",
+        "In Britain and the United States this now makes up roughly sixty percent of the average diet by calories, and around eighty percent for many adolescents. This is not a fringe corner of the food supply. It is the food supply."
+      ]
+    },
+    {
+      "h": "The Experiment That Settles It",
+      "p": [
+        "The obvious objection is that these foods are simply high in sugar, salt and fat, which we have known about for fifty years. Kevin Hall at the National Institutes of Health tested it, and went in as a sceptic expecting to find nothing.",
+        "Twenty adults lived on a metabolic ward where every mouthful could be measured. Each spent two weeks on an ultra-processed diet and two weeks on an unprocessed one, in random order, serving as their own control. The two diets were carefully matched for calories offered, sugar, fat, saturated fat, salt, fibre and macronutrients. On paper they were nutritionally identical. Participants ate as much or as little as they liked.",
+        "On the ultra-processed diet people ate about five hundred calories a day more, without noticing, and gained roughly a kilogram over the fortnight. On the unprocessed diet the same people lost roughly a kilogram. That is a randomised trial, not a correlation, and it says the processing itself does something that no nutrition label can capture."
+      ],
+      "pull": "Same nutrients. Same people. Five hundred extra calories a day, spontaneously."
+    },
+    {
+      "h": "Why It Works On You",
+      "p": [
+        "The first mechanism is speed. Ultra-processed food is soft, in van Tulleken's phrase pre-chewed, because industrial milling, extrusion and emulsification destroy the physical structure of the original ingredients. Real food resists you and that resistance takes time. Your satiety signalling is slow and evolved for slow eating. Deliver a thousand calories in six minutes with almost no chewing and you finish long before your body knows what happened. Add energy density, since water and fibre are out and refined starch and fat are in, and the appetite system is simply outrun.",
+        "The second is the additives, and here he is careful rather than alarmist. Emulsifiers such as polysorbate 80 have been shown in animal work to thin the protective gut mucus layer and produce inflammation and features of metabolic syndrome. Some non-sugar sweeteners appear to alter the microbiome in ways that impair glucose tolerance. The deeper point is regulatory: additives are tested individually, at set doses, usually by the people who want to sell them, and never in the combinations a human actually eats, dozens at a time, every day, for eighty years, starting in infancy.",
+        "The third is deliberate engineering. Sensory scientists aim at the bliss point, the mix that produces maximum craving rather than maximum satisfaction, which are different targets. A cheese puff dissolves instantly, so the brain never registers that calories arrived, an effect the food scientist Steven Witherly called vanishing caloric density. And complex shifting flavours defeat sensory-specific satiety, the ancient brake that normally makes the twentieth mouthful less appealing than the first."
+      ]
+    },
+    {
+      "h": "The Tobacco Inheritance",
+      "p": [
+        "This is where the book turns from physiology to history. In the 1980s Philip Morris, maker of Marlboro, bought General Foods and then Kraft, becoming for a time the largest food company in America. R J Reynolds merged with Nabisco. Because tobacco litigation made those internal documents public, researchers have traced flavour technology and consumer psychology developed for cigarettes being applied to food, along with the marketing frameworks.",
+        "The playbook came too. Fund research that manufactures doubt. Emphasise that the science is unsettled. Create front organisations that look like scientific bodies, such as the International Life Sciences Institute, founded by a Coca-Cola executive. Sponsor the professional associations that advise the public. Fund exercise campaigns so the conversation is about activity rather than product. And above all, reframe a systemic problem as personal responsibility, because a person who blames themselves does not campaign for regulation.",
+        "The nutrition advice itself was compromised. Documents show the sugar industry paid Harvard scientists in the 1960s to produce a review downplaying sugar's role in heart disease and blaming fat, undisclosed. When fat became the villain, industry removed it from tens of thousands of products, and removing fat makes food taste of nothing, so it was replaced with sugar, starch, thickeners and flavourings. The century's biggest piece of public health advice functioned as a marketing brief."
+      ],
+      "pull": "Every time we name a villain molecule, the industry reformulates around it and sells us the reformulation as health."
+    },
+    {
+      "h": "Not A Diet Plan",
+      "p": [
+        "The observational evidence is large and consistent. In the French NutriNet-Santé cohort, a ten percent increase in the proportion of ultra-processed food in the diet was associated with roughly a twelve percent increase in overall cancer risk, and other cohorts link it to cardiovascular disease, type 2 diabetes, depression, cognitive decline and all-cause mortality. Association is not causation, and he says so, but the combination of consistent epidemiology, a randomised trial showing a causal effect on intake, and plausible mechanisms is the exact pattern that eventually convinced the world about tobacco.",
+        "So van Tulleken refuses, on principle, to end with a diet plan. Telling individuals to stop eating the cheapest, most available, most heavily marketed food, engineered to be hard to stop eating, is like telling people in a polluted city to breathe less. He wants marketing restrictions, honest mandatory labelling, an end to industry funding of nutrition science, and price signals. He notes that Chile's black warning labels measurably cut purchases, which is precisely why industry fights such schemes while claiming to support consumer information.",
+        "His one personal practice is stranger and better than a rule. Eat as much of it as you like, on one condition: read the packet first and understand what you are reading. His claim, based on what happened to him, is that this knowledge is not neutral. It changes desire. He did not quit by discipline. He gradually stopped wanting it, the way someone who learns exactly what is in a cigarette enjoys it less."
+      ]
+    }
+  ],
+  "chart": {
+    "title": "How much of the diet is ultra-processed",
+    "subtitle": "Share of daily calories from NOVA group four foods",
+    "unit": "%",
+    "caption": "Approximate figures. National survey estimates for UK and US adults vary between roughly 55 and 60 percent depending on the study. The 80 percent line is the diet van Tulleken ate for his month, chosen because around one in five people in the UK already eats that way.",
+    "bars": [
+      {"label": "Van Tulleken's 4-week experiment", "value": 80, "display": "80%"},
+      {"label": "US adults, average", "value": 58, "display": "58%"},
+      {"label": "UK adults, average", "value": 57, "display": "57%"}
+    ]
+  },
+  "takeaways": [
+    "Read ingredient lists rather than nutrition panels for one week without changing what you buy. Use the plastic wrapper test: anything containing something you would never find in a home kitchen is ultra-processed.",
+    "Look hardest at the products you assume are healthy, because low-fat, low-sugar and high-protein reformulations usually need more additives, not fewer.",
+    "Slow your eating down deliberately, since eating rate is one of the clearest mechanisms in the evidence. Notice how much of your food needs almost no chewing.",
+    "Shift one habitual purchase at a time. Bread, breakfast and snacks are where most people's ultra-processed calories are concentrated.",
+    "Cook things that make more than one meal, because time and money are the real constraints and any plan that ignores them fails by Wednesday.",
+    "Check who funded any nutrition advice before you act on it, including advice from charities and professional bodies.",
+    "Drop the willpower framing for yourself and everyone else. Losing to a product engineered by sensory scientists to defeat your satiety signalling is not a character test."
+  ]
+}
