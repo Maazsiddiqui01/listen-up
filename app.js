@@ -3,8 +3,20 @@ let DATA, cur=null, tab='discover', genre='All', grouped=false, listView=localSt
 const COMPLEMENT={'Productivity':'Money','Money':'Psychology','Business':'Sales & Marketing','Sales & Marketing':'Psychology','Psychology':'Productivity','Health':'Productivity'};
 let prog=JSON.parse(localStorage.getItem('lu-prog')||'{}');
 let dl=JSON.parse(localStorage.getItem('lu-dl')||'{}');
-// cross-device progress sync (best-effort; localStorage stays the source of truth)
-const SB={url:'https://rfuflyhitqwxtcecllya.supabase.co',key:'sb_publishable_uUA9BpF1dAitc6lVa0IqTg_TX6igiQ4',user:'maaz'};
+// cross-device progress sync (best-effort; localStorage stays the source of truth).
+// The sync identity is a random ID generated once per browser/device and stored
+// locally, NOT a shared account. This app is shared by URL with other people, so
+// a shared identity (like a hardcoded name) would mix everyone's listening
+// history, "Continue" rail, and Finished shelf together. A private per-device ID
+// keeps every person's data completely separate while still letting the SAME
+// person's own multiple devices merge together if they ever reuse this ID.
+function deviceId(){
+  let id=localStorage.getItem('lu-uid');
+  if(!id){ id=(crypto.randomUUID?crypto.randomUUID():'d-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2));
+    localStorage.setItem('lu-uid',id); }
+  return id;
+}
+const SB={url:'https://rfuflyhitqwxtcecllya.supabase.co',key:'sb_publishable_uUA9BpF1dAitc6lVa0IqTg_TX6igiQ4',user:deviceId()};
 let lastRemote=0;
 function pushRemote(force){ if(!cur||!audio.duration)return; if(!force&&Date.now()-lastRemote<8000)return; lastRemote=Date.now();
   const p=prog[cur.slug]; if(!p)return;
@@ -42,7 +54,11 @@ try{ matchMedia('(prefers-color-scheme: dark)').addEventListener('change',e=>{
 
 async function load(){
   try{ DATA=await (await fetch('content.json',{cache:'no-cache'})).json(); }
-  catch(e){ $('#lib').innerHTML='<p style="padding:2rem;color:var(--sub)">Could not load the library. Check your connection and reload.</p>'; return; }
+  catch(e){
+    $('#lib').innerHTML='<div class="errstate">Could not load the library. Check your connection and try again.<br><button id="retryload" type="button">Retry</button></div>';
+    const r=$('#retryload'); if(r) r.onclick=()=>location.reload();
+    return;
+  }
   $('#tag').textContent=DATA.tagline;
   const gs=['All',...DATA.genres.map(g=>g.name)];
   $('#chips').innerHTML=gs.map((g,i)=>`<button class="chip${i===0?' on':''}" data-g="${g}" style="--cacc:${g==='All'?'#0FA0A0':gcolor(g)}">${g}</button>`).join('');
@@ -157,7 +173,9 @@ function render(){
   if(tab==='finished'){ books=DATA.books.filter(isDone); $('#lib').innerHTML=books.length?books.map(card).join(''):'<p style="padding:1.5rem;color:var(--sub);grid-column:1/-1">Nothing finished yet. Your completed listens will land here.</p>'; bind(); return; }
   books=DATA.books.filter(b=>!isDone(b)).filter(b=>genre==='All'||b.genre===genre);
   books.sort((a,b)=>(a.status==='ready'?0:1)-(b.status==='ready'?0:1));   // ready first, "Soon" sink to the bottom
-  if(grouped&&genre==='All'){
+  if(!books.length){
+    $('#lib').innerHTML='<p style="padding:1.5rem;color:var(--sub);grid-column:1/-1">Nothing here yet. Try a different topic.</p>';
+  } else if(grouped&&genre==='All'){
     let html='';
     DATA.genres.forEach(g=>{const gb=books.filter(b=>b.genre===g.name); if(gb.length){html+=`<div class="seclabel">${g.name}</div>`+gb.map(card).join('');}});
     $('#lib').innerHTML=html;
@@ -335,10 +353,12 @@ function renderReader(b,n){
   const chart = n.chart?chartHTML(n.chart):'';
   const keys=(n.takeaways&&n.takeaways.length)
     ? `<div class="rdkey"><h4>Do this this week</h4><ul>${n.takeaways.map(t=>`<li>${escR(t)}</li>`).join('')}</ul></div>`:'';
+  const alreadyOn = cur && cur.slug===b.slug;
+  const rdplayLabel = alreadyOn ? (audio.paused?'▶ Resume':'♪ Now playing') : '▶ Listen';
   return `<div class="rdbar">
       <button class="rdback" id="rdclose" type="button"><span aria-hidden="true">←</span> Library</button>
       <span class="rdt">${escR(b.title)}</span>
-      <button class="rdplay" id="rdplay" type="button">▶ Listen</button>
+      <button class="rdplay" id="rdplay" type="button">${rdplayLabel}</button>
     </div>
     <article class="rdwrap">
       <header class="rdhero">
@@ -367,7 +387,10 @@ async function openReader(b){
   host.innerHTML=renderReader(b,n);
   host.scrollTop=0;
   $('#rdclose').onclick=closeReader;
-  $('#rdplay').onclick=()=>{ closeReader(); openBook(b); };
+  $('#rdplay').onclick=()=>{
+    if(cur && cur.slug===b.slug){ closeReader(); showSheet(); }   // already playing: just reveal it, don't restart
+    else { closeReader(); openBook(b); }
+  };
 }
 function showReader(){ if(readerOpen) return; readerOpen=true; $('#reader').hidden=false;
   history.pushState({lu:'reader'},''); document.body.style.overflow='hidden'; }
@@ -376,7 +399,7 @@ function closeReader(){
   if(readerOpen && history.state && history.state.lu==='reader'){ poppingBack=true; history.back(); }
   else hideReader();
 }
-$('#read').onclick=()=>{ if(cur){ audio.pause(); openReader(cur); } };
+$('#read').onclick=()=>{ if(cur) openReader(cur); };   // keep listening while you read
 
 // ---- mark as done / not done ----
 function applyMarkBtn(){ const b=$('#markdone'); if(!cur) return;
@@ -403,6 +426,7 @@ function setMediaSession(b){
       artwork:[192,512].map(s=>({src:`covers/${b.slug}.png`,sizes:s+'x'+s,type:'image/png'}))});
     const A=(k,fn)=>{ try{ navigator.mediaSession.setActionHandler(k,fn); }catch(e){} };
     A('play',()=>audio.play().catch(()=>{})); A('pause',()=>audio.pause());
+    A('stop',()=>{ audio.pause(); audio.currentTime=0; });
     A('seekbackward',()=>skip(-15)); A('seekforward',()=>skip(15));
     A('previoustrack',()=>skip(-15)); A('nexttrack',()=>skip(15));
     A('seekto',e=>{ if(e.seekTime!=null&&audio.duration) audio.currentTime=e.seekTime; });
@@ -454,7 +478,9 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowLeft'&&sheetOpen) skip(-15);
   if(e.key==='ArrowRight'&&sheetOpen) skip(15);
 });
-$('#miopen').onclick=()=>{ if(cur) showSheet(); };   // reopening restarts the waveform
+$('#miopen').onclick=()=>{ if(!cur) return;
+  if(readerOpen) closeReader();   // the mini bar now stays visible/tappable over the Read view too
+  showSheet(); };
 
 // ---- live waveform ----
 let AC, analyser, srcNode, rafId, bins;
