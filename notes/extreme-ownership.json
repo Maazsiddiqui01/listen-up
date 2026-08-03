@@ -1,0 +1,74 @@
+{
+  "hook": "Jocko Willink stood in front of his commanders in Ramadi with a list of four true, legitimate reasons his unit had shot at itself. He read none of them. He said there was one person to blame, and it was him, and he fully expected to be fired.",
+  "read_min": 9,
+  "sections": [
+    {
+      "h": "The Worst Morning In Ramadi",
+      "p": [
+        "In 2006 Willink commanded Task Unit Bruiser, two SEAL platoons operating in what was then arguably the most dangerous city on earth. On one chaotic morning a friendly element ended up in a building nobody expected them to be in, was fired on, and fired back. An Iraqi soldier died. One of his own men was wounded. Air support was minutes from levelling the building with everyone inside it.",
+        "The investigation came. Willink had a genuinely excellent list of causes: bad communications, units moving off plan, faulty intelligence, a junior leader who did not pass information. Every item was true. He stood up and said none of them mattered, because he was the senior man on the battlefield and everything that happened out there was his.",
+        "He was not fired. And something changed inside the unit: his leaders started openly owning their own errors, because they had watched the boss do it first at maximum personal cost."
+      ]
+    },
+    {
+      "h": "Ownership Is Leverage, Not Guilt",
+      "p": [
+        "The principle is routinely misread as a slogan about accepting blame gracefully. It is a practical claim about where the leverage sits. If a failure is your subordinate's fault, you are powerless and can only complain. If it is yours, because you did not train, brief, verify or build a system that catches the error, then the fix is in your hands this afternoon.",
+        "Leif Babin gives the smaller, more ordinary version most of us will actually face. When something goes wrong, the competent instinct is to explain. But every well constructed explanation teaches the team that the correct response to failure is a well constructed defence, and after that you can never find out what is really happening, because every report arrives pre-processed.",
+        "The alternative is simple and hard. Say: that was mine, here is what I got wrong, here is what I am changing. Then stop talking. No qualifiers, no although in fairness."
+      ],
+      "pull": "There is only one person to blame for this. Me."
+    },
+    {
+      "h": "No Bad Teams, Only Bad Leaders",
+      "p": [
+        "During Hell Week, students are split into boat crews who race endlessly carrying inflatable boats on their heads. Boat Crew Two won almost everything. Boat Crew Six lost almost everything, and had developed the culture that follows: blame, resentment, and the settled belief that winning was not available to them.",
+        "An instructor swapped the two leaders. On the very next race Boat Crew Six, the same seven exhausted men, won. And Boat Crew Two, now under the previously losing leader, came second, because the standards built into them held.",
+        "The losing leader was not incompetent. He had accepted the losing and decided that conserving energy and noting the unfairness was the reasonable response. The new leader simply refused to accept it."
+      ],
+      "pull": "It is not what you preach, it is what you tolerate."
+    },
+    {
+      "h": "Believe, And Check The Ego",
+      "p": [
+        "A leader cannot make a team execute something they privately think is stupid, because scepticism telegraphs through every sentence. The SEALs hated being ordered to operate partnered with poorly trained Iraqi soldiers. Willink hated it too, so he went up the chain and asked why until he understood: American forces would eventually leave, and if the Iraqi Army could not operate alone, everything won at enormous cost would collapse behind them.",
+        "Once he believed it he could sell it. And note what he refused to do: tell his men that headquarters was making them do it. That sentence, said every day in every organisation, is a leader publicly announcing he is a bystander in his own command.",
+        "Ego is the other internal enemy. It stops leaders admitting error, accepting a better idea from below, or planning honestly. The test in any disagreement is one question: am I resisting this because it is bad for the mission, or because it is bad for me?"
+      ]
+    },
+    {
+      "h": "The Four Laws Of Combat",
+      "p": [
+        "Cover and Move: one element suppresses while another moves, then they swap. Organisationally, if a department you depend on is failing, that is not their problem you get to complain about. Their failure will become your failure, so your job is to help them, not to defend your team against them.",
+        "Simple: plans must survive being executed by exhausted people in the dark with half the information wrong. The test is not whether the plan is clear to you. Ask the most junior person to explain their part back in their own words. If they cannot, you have not briefed, you have talked.",
+        "Prioritise and Execute: relax, look around, make a call. When everything breaks at once, detach physically, identify the single highest priority, say it out loud so everyone hears it, direct effort there, then move to the next. Willink's hardest learned skill was lowering the weapon and looking behind him, because becoming a shooter is the moment a commander stops commanding."
+      ],
+      "pull": "Announce the priority out loud. A leader who has silently decided what matters most has done half a job."
+    },
+    {
+      "h": "Decentralised Command",
+      "p": [
+        "A human being can effectively lead somewhere between four and six people directly. Beyond that, direct control breaks. So build leaders at every level and let them decide, which requires two things in writing: the intent and end state, so they can improvise when the plan fails, and the exact limits of their authority, so they know when to escalate.",
+        "But this is not the absence of leadership. A leader who tells people to use their judgement and then disappears has abdicated, not delegated. Senior leaders must position themselves where they can see the whole picture rather than getting sucked into one part of the fight.",
+        "Every growing company hits this: the founder who was the decision maker at fifteen people is the bottleneck at a hundred and fifty, and the organisation has quietly learned that nothing can be decided without them."
+      ]
+    },
+    {
+      "h": "The Dichotomy, And What It Cost",
+      "p": [
+        "The closing idea is the honest correction to everything else, because every principle here becomes dangerous taken to its extreme. Extreme Ownership pushed too far becomes a micromanager doing every task personally. Decentralised Command pushed too far becomes abdication. Simple becomes simplistic. So a leader must live in tension: confident but never cocky, brave but not reckless, attentive to detail without losing the big picture, a leader and also a follower, humble but not passive, aggressive but not overbearing, calm but not robotic, close to the team but never so close to one person that they outrank the mission. The skill is not picking a side. It is knowing which way you lean and correcting for it.",
+        "It is easy to read all this as business tips and miss the weight underneath. Task Unit Bruiser lost men in Ramadi. Marc Lee was killed in a firefight in August 2006, the first SEAL to die in Iraq. Ryan Job was blinded by a sniper round the same day and died years later from complications of surgery. In September, Michael Monsoor threw himself onto a grenade to save the men beside him, and was awarded the Medal of Honor. When these two authors say a leader owns everything under his command, they are also saying it about the days their friends did not come home.",
+        "Held fairly, the military framing is both the strength and the limit. Combat gives a clarity business rarely has, and the consulting case studies always end in success, which is not how consulting goes. Take Extreme Ownership as a leadership stance rather than as a description of how causation actually works."
+      ]
+    }
+  ],
+  "takeaways": [
+    "On the next failure, run the ownership hypothesis first: assume it is entirely yours and write down what you would have had to do differently. You will find real actions where blame gives you none.",
+    "Walk your operation and list every substandard thing you have walked past without comment this month. Each one is now your published standard. Fix the two worst.",
+    "When handed a directive you do not believe in, ask why up the chain until you understand it, then own it in your own voice. Never say they are making us do this.",
+    "In any disagreement, answer honestly whether you are resisting because it is bad for the mission or bad for you.",
+    "Test plans by asking the most junior person to explain their part back. Not does that make sense, which always gets a yes.",
+    "When everything breaks at once, detach for sixty seconds, name the single highest priority out loud, direct effort there, then move to the next.",
+    "If your boss frustrates you, assume you have under communicated. Send more information than is asked for, before it is asked for."
+  ]
+}

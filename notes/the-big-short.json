@@ -1,0 +1,85 @@
+{
+  "hook": "A one eyed doctor sat alone in a dark office reading mortgage documents nobody else could stand to read, and found the largest mispricing in financial history sitting in plain sight. Then he had to survive two years of being called an idiot for being right too early.",
+  "read_min": 10,
+  "sections": [
+    {
+      "h": "The Man Who Read The Documents",
+      "p": [
+        "Michael Burry was a neurology resident who quit medicine to run a hedge fund called Scion Capital. He lost an eye to childhood cancer, worked with the lights off, and later discovered he had a form of Asperger's while reading about his son's diagnosis. In 2005 he did something apparently nobody else on Wall Street was doing: he read subprime mortgage bond prospectuses, all hundred and thirty pages of them.",
+        "What he found was that a huge share of American mortgages were being made to people who could not repay, on terms engineered to hide that for exactly two years. Low teaser rates, then a reset to something far higher. As long as house prices rose, borrowers refinanced before the reset. The moment prices stopped rising, the resets landed and defaults would follow.",
+        "So he did the arithmetic on timing. Loans written in 2005 reset in 2007. Not eventually. Not at some point in the cycle. He circled the date."
+      ],
+      "pull": "His advantage was not intelligence. It was tolerance for tedium."
+    },
+    {
+      "h": "Buying Insurance On A Burning House",
+      "p": [
+        "Before 2005 there was no practical way to bet against housing. You could be long or stay out. Burry went to the banks and asked them to create something: credit default swaps on specific subprime bonds. Functionally, insurance. Pay a small annual premium, collect the face value if the bond defaults.",
+        "Two features made it perfect. Your loss was capped at the premiums, so about two percent a year bought exposure to the whole value. And you could insure a bond you did not own. You could buy fire insurance on your neighbour's house, and eventually the market bought it a hundred times over.",
+        "Burry's real edge was specificity. He did not bet on housing generally. He named individual bonds, hand picked because they were stuffed with no documentation loans from the most aggressive lenders. He was asking to insure the houses that were already smouldering, and the banks charged him the standard price, because to their models a rating was a rating."
+      ]
+    },
+    {
+      "h": "The Tower And The Alchemy",
+      "p": [
+        "Picture a mortgage bond as a tower of about fifteen floors, with a few thousand real home loans underneath it. Monthly payments fill the tower from the top down, so the top floors get paid first. Losses eat it from the bottom up, so the ground floor is wiped out first. Bottom floors were rated triple B and paid high interest. Top floors were rated triple A and were treated as being as safe as government debt.",
+        "The triple B floors were hard to sell. So Wall Street gathered a hundred of them from a hundred different towers, put them in a new pot, sliced it again, and roughly eighty percent of that pot of pure rubbish came back rated triple A. The justification was diversification. But these were not a hundred independent risks. They were a hundred slices of the same bet on the same borrowers driven by the same house prices.",
+        "Then the market ran out of bad loans, so it built synthetic versions: bets on bets, referencing the same underlying pool over and over. That is why the eventual losses dwarfed the real subprime market."
+      ],
+      "pull": "A machine that took lead and turned it into gold, and the alchemy was performed by the agencies the issuers were paying."
+    },
+    {
+      "h": "Averages Hide The Bodies",
+      "p": [
+        "The rating agencies were not merely conflicted, they were exploitable, and the banks designed products to exploit them. The agencies scored pools partly on the average credit score of the borrowers. A pool where everyone scored six hundred and fifteen looked identical to one where half scored five hundred and fifty and half scored six hundred and eighty. Same average, wildly different risk.",
+        "Borrowers with no documented income were sometimes scored as less risky than those with documented low income, because missing data registered as neutral rather than as a warning. And when Danny Moses asked an agency employee what the model predicted if house prices fell, he was told the model could not accept a negative number. The historical data contained no decline, so there was no field to enter one.",
+        "The loans themselves read like satire. A strawberry picker in Bakersfield, California, earning around fourteen thousand dollars a year, was lent roughly seven hundred and twenty four thousand dollars. That loan was packaged, sliced, repackaged, and a large piece of it rated triple A."
+      ]
+    },
+    {
+      "h": "The Outsiders And Las Vegas",
+      "p": [
+        "The other shorts were a gallery of misfits. Steve Eisman, an analyst famous for being unable to stop himself saying the true thing in public, who had already fought a war against a lender whose advertised seven percent loans actually cost borrowers closer to twelve and a half. Greg Lippmann, the Deutsche Bank trader who toured Wall Street cheerfully telling clients his own bank's product was garbage, because a bet that size needs company. And Cornwall Capital, two friends who started with a hundred and ten thousand dollars in a shed in Berkeley hunting cheap options on extreme events.",
+        "In January 2007 they all went to a securitisation conference in Las Vegas, hoping to find someone who could explain why they were wrong. Eisman found himself opposite a CDO manager overseeing around fifteen billion dollars who was paid on volume, meaning his fortunes were essentially unaffected by whether investors ever got their money back. Eisman turned to his colleague and said, in effect, whatever he is buying, I want to short it.",
+        "Cornwall made the smartest trade of the lot. They realised the mispricing was not at the bottom, where everyone was arguing, but at the top. Insurance on supposedly riskless triple A tranches cost a fraction of the price, on instruments made of the same correlated material. They turned a hundred and ten thousand dollars into north of a hundred million."
+      ]
+    },
+    {
+      "h": "Being Early Looks Like Being Wrong",
+      "p": [
+        "Burry put the money on in 2005 and then nothing happened for two years while premiums drained out every month. His investors, who had hired a stock picker, revolted, demanded their money back and threatened to sue. He walled the bets off so they could not be unwound, went silent, and later described it as the loneliest period of his life.",
+        "Eisman's problem was different. Loans were defaulting at rising rates, publicly reported every month, and the bond prices did not move. These securities did not trade on an exchange. The banks that sold them also decided what they were worth. The market simply declined to acknowledge the information.",
+        "And the banks were not clever intermediaries offloading risk. They were the customers. Howie Hubler at Morgan Stanley correctly shorted two billion of triple B tranches, then sold insurance on around sixteen billion of triple A CDOs to fund the premiums. Same material. His loss was around nine billion dollars, the largest by a single trader in Wall Street history."
+      ],
+      "pull": "The information was public. What failed was not intelligence. It was the willingness to look."
+    },
+    {
+      "h": "Nobody's Money At Risk",
+      "p": [
+        "They all won. Scion returned something like four hundred and eighty nine percent net of fees from 2000 to mid 2008 against roughly two percent for the broad market. Burry made his investors around seven hundred million dollars and himself about a hundred million. Almost none of them enjoyed it. Charlie Ledley of Cornwall found being proved right about the absence of adults at the centre of the system closer to grief than triumph.",
+        "Lewis ends by tracing the whole thing to a decision made decades earlier. In 1981 Salomon Brothers became the first Wall Street partnership to go public, and every other firm followed. Before that, the people running these firms were gambling with their own money and their own houses. Afterwards, the profits were taken personally each year and the losses fell on shareholders and finally taxpayers.",
+        "No investment bank owned by its employees, Lewis argues, would have levered itself thirty five times over on assets its own leaders did not understand. These people were not unusually stupid. They were operating inside a structure where nobody who could stop the machine had any personal reason to."
+      ]
+    }
+  ],
+  "chart": {
+    "title": "The maths nobody ran",
+    "subtitle": "Losses on mid-decade subprime pools, versus the level that wipes out a triple B tranche",
+    "unit": "",
+    "caption": "Figures as presented in Greg Lippmann's pitch in the book. Flat house prices alone came within one point of destroying the tranche entirely.",
+    "bars": [
+      {"label": "House prices flat", "value": 7, "display": "~7% losses"},
+      {"label": "Triple B wipeout level", "value": 8, "display": "8% losses"},
+      {"label": "House prices fall 5%", "value": 17, "display": "~17% losses"}
+    ]
+  },
+  "takeaways": [
+    "Read the primary documents. In almost every field there is a boring, freely available source that nobody reads, and reading it is a real edge.",
+    "Follow the incentives before you follow the argument. Ask how the person telling you something is safe gets paid, and what happens to them personally if they are wrong.",
+    "Distrust averages. They hide exactly the information that matters, which is the shape of the distribution and where the worst cases sit.",
+    "Ask what a model structurally cannot represent. The rating model could not accept a falling house price, and that is precisely where the risk lived.",
+    "Check whether your diversification is real. A hundred bets that depend on the same underlying condition are one bet wearing a hundred hats.",
+    "Plan for the gap between being right and being seen to be right. A contrarian position you cannot survive holding is worthless.",
+    "Before any bet, ask whether the counterparty will still exist to pay you if you win."
+  ]
+}
