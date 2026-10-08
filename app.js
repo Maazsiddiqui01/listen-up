@@ -17,14 +17,17 @@ function deviceId(){
   return id;
 }
 const SB={url:'https://rfuflyhitqwxtcecllya.supabase.co',key:'sb_publishable_uUA9BpF1dAitc6lVa0IqTg_TX6igiQ4',user:deviceId()};
+// x-lu-uid: the database only lets a request read or write rows whose user_key
+// equals this header, so one device can never see or overwrite another's progress.
+const sbH=x=>Object.assign({apikey:SB.key,Authorization:'Bearer '+SB.key,'x-lu-uid':SB.user},x);
 let lastRemote=0;
 function pushRemote(force){ if(!cur||!audio.duration)return; if(!force&&Date.now()-lastRemote<8000)return; lastRemote=Date.now();
   const p=prog[cur.slug]; if(!p)return;
   fetch(SB.url+'/rest/v1/listenup_progress?on_conflict=user_key,slug',{method:'POST',
-    headers:{apikey:SB.key,Authorization:'Bearer '+SB.key,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates'},
+    headers:sbH({'Content-Type':'application/json',Prefer:'resolution=merge-duplicates'}),
     body:JSON.stringify({user_key:SB.user,slug:cur.slug,t:p.t,dur:p.dur,done:!!p.done,updated_at:new Date().toISOString()})}).catch(()=>{}); }
 function pullRemote(){
-  fetch(SB.url+'/rest/v1/listenup_progress?select=slug,t,dur,done,updated_at&user_key=eq.'+SB.user,{headers:{apikey:SB.key,Authorization:'Bearer '+SB.key}})
+  fetch(SB.url+'/rest/v1/listenup_progress?select=slug,t,dur,done,updated_at&user_key=eq.'+SB.user,{headers:sbH()})
   .then(r=>r.ok?r.json():[]).then(rows=>{ let ch=false;
     rows.forEach(row=>{ const u=Date.parse(row.updated_at)||0, loc=prog[row.slug];
       if(!loc||u>(loc.u||0)){ prog[row.slug]={t:row.t||0,dur:row.dur||0,done:!!row.done,u}; ch=true; } });
@@ -407,7 +410,7 @@ function applyMarkBtn(){ const b=$('#markdone'); if(!cur) return;
   b.textContent=done?'✓ Finished · tap to undo':'Mark as finished'; }
 function pushSlug(slug){ const p=prog[slug]; if(!p) return;
   fetch(SB.url+'/rest/v1/listenup_progress?on_conflict=user_key,slug',{method:'POST',
-    headers:{apikey:SB.key,Authorization:'Bearer '+SB.key,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates'},
+    headers:sbH({'Content-Type':'application/json',Prefer:'resolution=merge-duplicates'}),
     body:JSON.stringify({user_key:SB.user,slug,t:p.t,dur:p.dur||0,done:!!p.done,updated_at:new Date().toISOString()})}).catch(()=>{}); }
 function setDone(b,done){
   const p=prog[b.slug]||{};
